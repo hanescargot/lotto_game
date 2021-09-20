@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="main_color_light">#FFFF9999</color>
-    <color name="main_color_dark">#FFF26464</color>
+    <color name="main_pink_bg">#FDF5F5</color>
+    <color name="main_pink_light">#FFFF9999</color>
+    <color name="main_pink_dark">#FFF26464</color>
     <color name="custom_black">#FF333333</color>
+    <color name="grey">#FF777777</color>
+    <color name="light_grey">#DDDDDD</color>
     <color name="white">#FFFFFFFF</color>
     <color name="black">#FF000000</color>
+    <color name="no_color">#00000000</color>
 </resources>

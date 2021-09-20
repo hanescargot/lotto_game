@@ -1,14 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".FragmentAuction">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="auction" />
+    <LinearLayout
+        android:padding="8dp"
+        android:layout_gravity="center"
+        android:id="@+id/etc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/auction_round_box_full"
+        tools:context=".FragmentAuction"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <RelativeLayout
+            android:id="@+id/top_box"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="8dp"
+            android:paddingTop="8dp"
+            android:background="@drawable/auction_round_full_top_box"
+            android:layout_above="@+id/item_case">
 
-</FrameLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/CustomTextWhite"
+                android:layout_alignParentLeft="true"
+                android:text="한*주 님"
+                android:textStyle="bold"/>
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_baseline_info_24"/>
+        </RelativeLayout>
+
+        <include layout="@layout/part_money_light"/>
+
+        <RelativeLayout
+            android:id="@+id/item_case"
+            android:layout_width="240dp"
+            android:layout_height="300dp"
+            android:background="@drawable/auction_empty_round_box">
+            <ImageView
+                android:id="@+id/item_iv"
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:src="@drawable/test_item"/>
+
+            <RelativeLayout
+                android:layout_below="@id/item_iv"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/timer_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:paddingHorizontal="8dp"
+                    android:src="@drawable/ic_time_bar" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:paddingBottom="4dp"
+                    android:layout_centerInParent="true"
+                    android:text="12:00:59"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/bs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:behavior_peekHeight="164dp"
+        android:background="@color/no_color"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
+
+        <ImageButton
+            android:id="@+id/bs_button"
+            android:layout_marginLeft="16dp"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="bottom"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:backgroundTint="@color/no_color"
+            android:src="@drawable/ic_auction"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_alignParentRight="true"
+            android:gravity="right"
+            android:orientation="vertical">
+
+<!--            <include-->
+<!--                android:id="@+id/invisible_current_price"-->
+<!--                layout="@layout/part_money_light"/>-->
+
+            <LinearLayout
+                android:id="@+id/invisible_current_price"
+                android:layout_marginVertical="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/auction_round_money_box_light"
+                >
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv"
+                        android:gravity="left|center_vertical"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/auction_round_money_box_full"
+                        android:text="    현재가"
+                        style="@style/CustomTextWhite"/>
+                    <ImageView
+                        android:layout_alignRight="@id/tv"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_coins"
+                        android:layout_centerVertical="true"
+                        />
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_current_item_price"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1,000,000,000,000,000"
+                    style="@style/CustomTextPinkDark"/>
+                <TextView
+                    android:layout_marginRight="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Coin"
+                    style="@style/CustomTextPinkDark"/>
+            </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/invisible_timer"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="240dp"
+                    android:layout_height="80dp"
+                    android:paddingHorizontal="8dp"
+                    android:src="@drawable/ic_time_bar" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:paddingBottom="4dp"
+                    android:layout_centerInParent="true"
+                    android:text="12:00:59"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/bs_text_bar"
+            android:layout_below="@id/bs_button"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            style="@style/CustomTextWhite"
+            android:text="주문하기"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:background="@drawable/auction_round_full_top_box"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/bs_text_bar"
+            android:background="@drawable/auction_round_empty_bottom_box"
+            android:layout_alignParentBottom="true"
+            android:scaleType="centerCrop"/>
+
+    </RelativeLayout>
+
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
