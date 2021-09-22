@@ -26,5 +26,5 @@
         android:text="1,000 Coin"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="@color/main_pink_dark"/>
+        android:textColor="@color/main_blue_dark"/>
 </RelativeLayout>

@@ -54,7 +54,7 @@
       android:fillColor="#F40E34"/>
   <path
       android:pathData="M40,448l0,16l128,0l32,-32l-72,-72z"
-      android:fillColor="#7AB9EC"/>
+      android:fillColor="@color/main_blue_light"/>
   <path
       android:pathData="M344,408h72v16h-72z"
       android:fillColor="#FE946F"/>

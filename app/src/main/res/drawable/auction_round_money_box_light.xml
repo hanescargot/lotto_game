@@ -7,5 +7,5 @@
         android:radius="32dp" />
     <stroke
         android:width="2dp"
-        android:color="@color/main_pink_dark" />
+        android:color="@color/main_blue_dark" />
 </shape>

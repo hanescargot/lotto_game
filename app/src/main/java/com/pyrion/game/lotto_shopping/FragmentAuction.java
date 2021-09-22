@@ -1,27 +1,17 @@
 package com.pyrion.game.lotto_shopping;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.OverScroller;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,7 +20,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
  */
 public class FragmentAuction extends Fragment {
     BottomSheetBehavior bottomSheetBehavior;
-
+    ImageButton bsFoldButton;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -88,19 +78,28 @@ public class FragmentAuction extends Fragment {
         View invisibleTimer = view.findViewById(R.id.invisible_timer);
         //pop up bottom sheet button
         ImageButton bsIvButton = view.findViewById(R.id.bs_button);
-        TextView bsTvBar = view.findViewById(R.id.bs_text_bar);
+        bsFoldButton = view.findViewById(R.id.bs_fold_button);
+
+        TextView bsTvBar = view.findViewById(R.id.bs_top_bar_text);
         View bs= view.findViewById(R.id.bs);
-        BottomSheetBehavior bottomSheetBehavior= BottomSheetBehavior.from(bs); //get BottomSheetBehavior
+        bottomSheetBehavior= BottomSheetBehavior.from(bs); //get BottomSheetBehavior
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         bsIvButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                setBottomSheetState();
+            }
+        });
+        bsFoldButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setBottomSheetState();
             }
         });
         bsTvBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                setBottomSheetState();
             }
         });
 
@@ -128,5 +127,15 @@ public class FragmentAuction extends Fragment {
                 invisibleTimer.setAlpha(slideOffset);
             }
         });
+    }
+
+    public void setBottomSheetState(){
+        if( bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED){
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            bsFoldButton.setRotation(0);
+        }else {
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            bsFoldButton.setRotation(270);
+        }
     }
 }

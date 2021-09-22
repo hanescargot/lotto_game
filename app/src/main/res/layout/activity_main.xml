@@ -56,7 +56,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="1,000"
-                        style="@style/CustomTextPinkDark"/>
+                        style="@style/CustomTextBlueDark"/>
 
                     <TextView
                         android:id="@+id/coin"
@@ -67,7 +67,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Coin"
-                        style="@style/CustomTextPinkDark"/>
+                        style="@style/CustomTextBlueDark"/>
                 </RelativeLayout>
             </LinearLayout>
 
@@ -81,14 +81,17 @@
         android:layout_weight="1">
     </androidx.viewpager2.widget.ViewPager2>
 
+
+
+<!--    app:itemIconTint="@color/main_blue_bg"-->
+<!--    app:itemTextColor="@color/main_blue_bg"-->
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_margin="8dp"
-        android:background="@drawable/auction_round_box_full_dark"
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemIconTint="@color/main_pink_bg"
-        app:itemTextColor="@color/main_pink_bg"
+        app:itemTextColor="@color/main_blue_bg"
+        android:background="@color/main_blue_dark"
         app:itemTextAppearanceActive="@style/BottomNavigation.ActiveItemTextAppearance"
         app:menu="@menu/bottom_navigation"/>
 

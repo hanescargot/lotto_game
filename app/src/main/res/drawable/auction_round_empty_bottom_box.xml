@@ -8,5 +8,5 @@
         android:bottomRightRadius="16dp"/>
     <stroke
         android:width="4dp"
-        android:color="@color/main_pink_light" />
+        android:color="@color/main_blue_light" />
 </shape>

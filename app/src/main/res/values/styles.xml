@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="ModalBottomSheetDialog" parent="Widget.MaterialComponents.BottomSheet.Modal">
-        <item name="backgroundTint">@color/main_pink_light</item>
+        <item name="backgroundTint">@color/main_blue_light</item>
         <item name="shapeAppearance">@style/ShapeAppearance.App.LargeComponent</item>
     </style>
 
@@ -11,7 +11,6 @@
     </style>
 
     <style name="BottomNavigation.ActiveItemTextAppearance" parent="TextAppearance.AppCompat">
-        <item name="android:itemBackground">@color/black</item>
     </style>
 
     <style name="CustomTextWhite" parent="@style/TextAppearance.AppCompat">
@@ -19,9 +18,9 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <style name="CustomTextPinkDark" parent="@style/TextAppearance.AppCompat">
+    <style name="CustomTextBlueDark" parent="@style/TextAppearance.AppCompat">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/main_pink_dark</item>
+        <item name="android:textColor">@color/main_blue_dark</item>
         <item name="android:textStyle">bold</item>
     </style>
 </resources>
