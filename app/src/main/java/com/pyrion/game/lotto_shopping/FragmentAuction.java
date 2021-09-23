@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,6 +78,9 @@ public class FragmentAuction extends Fragment {
 
         View invisibleCurrentPrice = view.findViewById(R.id.invisible_current_price);
         View invisibleTimer = view.findViewById(R.id.invisible_timer);
+        View all = view.findViewById(R.id.all);
+        TextView et = view.findViewById(R.id.et);
+
         //pop up bottom sheet button
         ImageButton bsIvButton = view.findViewById(R.id.bs_button);
         bsFoldButton = view.findViewById(R.id.bs_fold_button);
@@ -110,6 +115,7 @@ public class FragmentAuction extends Fragment {
             @Override
             public void onStateChanged(View bottomSheet, int newState) {
                 if( newState == BottomSheetBehavior.STATE_EXPANDED ){
+//                    사르륵 나타나기
 //                    Animation animation = new AlphaAnimation(0, 1);
 //                    animation.setDuration(200);
 
@@ -125,8 +131,11 @@ public class FragmentAuction extends Fragment {
             public void onSlide(View bottomSheet, float slideOffset) {
                 invisibleCurrentPrice.setAlpha(slideOffset);
                 invisibleTimer.setAlpha(slideOffset);
+                all.setAlpha(1-slideOffset);
             }
         });
+
+        ;
     }
 
     public void setBottomSheetState(){
@@ -138,4 +147,5 @@ public class FragmentAuction extends Fragment {
             bsFoldButton.setRotation(270);
         }
     }
+
 }
