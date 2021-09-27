@@ -4,7 +4,8 @@
     <color name="main_blue_light_bg">#E2EFFF</color>
     <color name="main_blue_dark_bg">#95B5ED</color>
     <color name="main_blue_light">#0066EE</color>
-    <color name="main_blue_dark">#0F3388</color>
+    <color name="main_blue_dark">#1649BF</color>
+    <color name="main_blue_sub">#76ADF6</color>
     <color name="custom_black">#FF333333</color>
     <color name="grey">#FF777777</color>
     <color name="light_grey">#DDDDDD</color>
@@ -18,5 +19,8 @@
 
     <color name="button_blue">#0B55C4</color>
     <color name="button_red">#BFE01500</color>
-
+<!--76ADF6-->
+<!---->
+<!--    <color name="main_blue_light">#0066EE</color>-->
+<!--    <color name="main_blue_dark">#0F3388</color>-->
 </resources>

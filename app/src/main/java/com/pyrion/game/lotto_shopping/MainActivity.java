@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         ViewPager2 viewPager = findViewById(R.id.fragment_container);
-        viewPager.setAdapter( new PagerAdapter(this));
+        viewPager.setAdapter( new MainPagerAdapter(this));
 
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        FragmentManager fragmentManager = this.getSupportFragmentManager();
+//        FragmentManager fragmentManager = this.getSupportFragmentManager();
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
 
         bottomNavigationView.setItemIconTintList(null);

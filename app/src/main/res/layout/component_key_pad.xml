@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
 
         android:background="@drawable/auction_box_empty"
-        android:backgroundTint="@color/main_blue_dark"
+        android:backgroundTint="@color/main_blue_sub"
         android:weightSum="7"
         android:orientation="vertical"
         >
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
 
             android:weightSum="7"
-            android:background="@color/light_grey"
+            android:background="@color/main_blue_sub"
             android:padding="8dp"
             android:orientation="horizontal">
             <TextView
@@ -51,13 +51,13 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/grey"
+                android:backgroundTint="@color/main_blue_light"
                 android:src="@drawable/ic_baseline_arrow_drop_up_24"/>
             <ImageButton
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/grey"
+                android:backgroundTint="@color/main_blue_light"
                 android:src="@drawable/ic_baseline_arrow_drop_down_24"/>
 
         </LinearLayout>
@@ -69,11 +69,11 @@
             android:layout_width="match_parent"
             android:stretchColumns="*"
             android:padding="8dp"
-            android:backgroundTint="@color/main_blue_dark"
+            android:backgroundTint="@color/main_blue_sub"
             android:weightSum="12">
 
             <TableRow
-                android:background="@color/main_blue_dark"
+                android:background="@color/main_blue_sub"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
@@ -114,7 +114,7 @@
             </TableRow>
 
             <TableRow
-                android:background="@color/main_blue_dark"
+                android:background="@color/main_blue_sub"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
@@ -154,7 +154,7 @@
             </TableRow>
 
             <TableRow
-                android:background="@color/main_blue_dark"
+                android:background="@color/main_blue_sub"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
@@ -193,7 +193,7 @@
             </TableRow>
 
             <TableRow
-                android:background="@color/main_blue_dark"
+                android:background="@color/main_blue_sub"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
@@ -232,7 +232,7 @@
             </TableRow>
 
             <TableRow
-                android:background="@color/main_blue_dark"
+                android:background="@color/main_blue_sub"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
@@ -275,7 +275,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
-                android:background="@color/main_blue_dark"
+                android:background="@color/main_blue_sub"
 
                 android:weightSum="2">
                 <Button
@@ -284,7 +284,7 @@
                     android:layout_weight="1"
                     style="@style/CustomTextBlue"
                     android:gravity="center"
-                    android:backgroundTint="@color/main_blue_dark_bg"
+                    android:backgroundTint="@color/main_blue_dark"
                     android:layout_marginRight="8dp"
                     android:textColor="@color/main_blue_bg"
                     android:textStyle="bold"
@@ -298,7 +298,7 @@
                     android:gravity="center"
                     android:textColor="@color/main_blue_bg"
                     android:textStyle="bold"
-                    android:backgroundTint="@color/main_blue_dark_bg"
+                    android:backgroundTint="@color/main_blue_dark"
                     android:text="취소"
                     />
             </TableRow>

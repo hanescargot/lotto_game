@@ -1,14 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentResearch">
+    android:orientation="vertical"
+    tools:context=".research.FragmentResearch">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="reach" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="32dp"/>
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal|bottom">
+
+            <ImageView
+                android:id="@+id/iv_bingo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/research_bingo"
+                />
+
+<!--        android:layout_gravity="top"-->
+
+            <ImageView
+                android:id="@+id/iv_ranking"
+                android:layout_gravity="top"
+                android:layout_marginHorizontal="8dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/research_ranking_icon"/>
+
+            <ImageView
+                android:id="@+id/iv_search"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/research_search"
+                />
+
+    </LinearLayout>
+
+
+</LinearLayout>

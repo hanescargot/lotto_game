@@ -4,12 +4,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.pyrion.game.lotto_shopping.research.FragmentResearch;
 
-public class PagerAdapter extends FragmentStateAdapter {
+
+public class MainPagerAdapter extends FragmentStateAdapter {
 
     Fragment[] fragments = new Fragment[4];
 
-    public PagerAdapter(FragmentActivity fragmentActivity){
+    public MainPagerAdapter(FragmentActivity fragmentActivity){
         super(fragmentActivity);
 
         fragments[0] = new FragmentBuy();

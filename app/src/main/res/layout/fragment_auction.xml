@@ -10,9 +10,11 @@
     <RelativeLayout
         android:id="@+id/all"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <RelativeLayout
+            android:id="@+id/ribbon"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -50,9 +52,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/auction_round_box_full"
+            android:backgroundTint="@color/main_blue_sub"
             android:orientation="vertical"
             android:gravity="center"
             >
+
             <RelativeLayout
                 android:id="@+id/top_box"
                 android:layout_width="240dp"
@@ -60,6 +64,7 @@
                 android:paddingHorizontal="8dp"
                 android:paddingTop="8dp"
                 android:background="@drawable/auction_round_full_top_box"
+                android:backgroundTint="@color/main_blue_sub"
                 android:layout_above="@+id/item_case">
 
                 <TextView
@@ -82,7 +87,8 @@
                 android:id="@+id/item_case"
                 android:layout_width="240dp"
                 android:layout_height="300dp"
-                android:background="@drawable/auction_empty_round_box">
+                android:background="@drawable/auction_empty_round_box"
+                >
                 <ImageView
                     android:id="@+id/item_iv"
                     android:layout_centerInParent="true"

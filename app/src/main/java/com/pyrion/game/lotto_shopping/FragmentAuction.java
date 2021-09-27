@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -23,6 +25,9 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 public class FragmentAuction extends Fragment {
     BottomSheetBehavior bottomSheetBehavior;
     ImageButton bsFoldButton;
+
+    Animation floatAnimation;
+    View center, ribbon; //floating animation
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -57,6 +62,7 @@ public class FragmentAuction extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        floatAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.seleted_float);
 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -71,6 +77,12 @@ public class FragmentAuction extends Fragment {
         return inflater.inflate(R.layout.fragment_auction, container, false);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        center.startAnimation(floatAnimation);
+        ribbon.startAnimation(floatAnimation);
+    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -79,7 +91,9 @@ public class FragmentAuction extends Fragment {
         View invisibleCurrentPrice = view.findViewById(R.id.invisible_current_price);
         View invisibleTimer = view.findViewById(R.id.invisible_timer);
         View all = view.findViewById(R.id.all);
-        TextView et = view.findViewById(R.id.et);
+
+        center = view.findViewById(R.id.center);
+        ribbon = view.findViewById(R.id.ribbon);
 
         //pop up bottom sheet button
         ImageButton bsIvButton = view.findViewById(R.id.bs_button);
@@ -132,6 +146,8 @@ public class FragmentAuction extends Fragment {
                 invisibleCurrentPrice.setAlpha(slideOffset);
                 invisibleTimer.setAlpha(slideOffset);
                 all.setAlpha(1-slideOffset);
+
+                //TODO : add rotation arrow
             }
         });
 
