@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/title"
         android:paddingHorizontal="16dp"
-        android:background="@drawable/auction_round_money_box_light"
+        android:background="@drawable/main_round_money_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
@@ -35,16 +35,13 @@
 
     </LinearLayout>
 
-
-
-
     <androidx.recyclerview.widget.RecyclerView
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/title"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="24dp"
         android:padding="8dp"
         />
 

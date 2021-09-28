@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:orientation="horizontal"
-        android:background="@drawable/auction_round_money_box_light"
+        android:background="@drawable/main_round_money_box"
         >
 <!--        공 입력 전-->
         <LinearLayout

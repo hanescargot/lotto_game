@@ -23,6 +23,11 @@
         <item name="android:textColor">@color/main_blue_dark</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="CustomTextBlack" parent="@style/TextAppearance.AppCompat">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/custom_black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
     <style name="CustomTextBlueDark" parent="@style/TextAppearance.AppCompat">
         <item name="android:textSize">16sp</item>
