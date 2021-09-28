@@ -3,12 +3,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".research.DialogFragmentBingo">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".research.DialogFragmentRanking">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/research_ranking_icon"/>
+        android:background="@drawable/research_round_box"/>
+    <LinearLayout
+        android:layout_centerHorizontal="true"
+        android:id="@+id/title"
+        android:paddingHorizontal="16dp"
+        android:background="@drawable/auction_round_money_box_light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:padding="8dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ranking_sub_title"/>
+        <TextView
+            android:layout_marginLeft="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/CustomTextBlueDark"
+            android:textColor="@color/custom_black"
+            android:text="이번주 가장 많이 고른 번호 순위"
+            android:layout_gravity="center"
+            />
+
+    </LinearLayout>
+
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title"
+        android:layout_marginBottom="40dp"
+        android:padding="8dp"
+        />
+
 
 </RelativeLayout>

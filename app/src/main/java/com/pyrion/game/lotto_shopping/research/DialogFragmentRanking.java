@@ -4,12 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.pyrion.game.lotto_shopping.R;
 
@@ -64,16 +61,22 @@ public class DialogFragmentRanking extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.research_dialog_ranking, container, false);
+        View view =inflater.inflate(R.layout.research_dialog_ranking, container);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+        AdapterRecyclerViewRanking adapter = new AdapterRecyclerViewRanking(getActivity());
+
+        recyclerView.setAdapter(adapter);
+//        return inflater.inflate(R.layout.research_dialog_ranking, container, false);
+        return view;
     }
 
-    View view ;
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.view = view;
-//        Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.research_popup);
-//        view.startAnimation(animation);
+//        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+//        AdapterRecyclerViewRanking adapter = new AdapterRecyclerViewRanking(getActivity());
+//
+//        recyclerView.setAdapter(adapter);
     }
 
     @Override

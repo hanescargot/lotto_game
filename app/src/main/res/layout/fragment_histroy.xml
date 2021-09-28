@@ -1,14 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".FragmentAuction">
+<!--    floating bar -->
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+<!--    main-->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="history" />
+        android:layout_height="72dp"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <RelativeLayout
+            android:background="@color/main_blue_dark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <ImageButton
+                android:layout_alignParentLeft="true"
+                android:layout_width="72dp"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/main_blue_dark"
+                android:src="@drawable/ic_baseline_arrow_left_24"
+                />
+            <TextView
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/CustomTextWhite"
+                android:textSize="20sp"
+                android:text="287 회"/>
+
+
+            <ImageButton
+                android:layout_alignParentRight="true"
+                android:layout_width="72dp"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/main_blue_dark"
+                android:src="@drawable/ic_baseline_arrow_right_24"
+                 />
+        </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>
