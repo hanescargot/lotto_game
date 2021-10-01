@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/title"
         android:paddingHorizontal="16dp"
-        android:background="@drawable/main_round_money_box"
+        android:background="@drawable/auction_empty_round_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/CustomTextBlueDark"
-            android:textColor="@color/custom_black"
+            android:textColor="@color/custom_black_blue"
             android:text="이번주 가장 많이 고른 번호 순위"
             android:layout_gravity="center"
             />

@@ -1,14 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentBuy">
+    tools:context=".FragmentBuy"
+    android:padding="8dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="buy" />
+<!--    Bottom -->
+    <RelativeLayout
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/ticket_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:paddingBottom="8dp"
+        >
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            style="@style/CustomTextBlue"
+            android:textColor="@color/custom_black_blue"
+            android:gravity="center_vertical"
+            android:text="사용할 티켓 선택"/>
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/ic_baseline_info_24"
+            android:layout_toRightOf="@id/title"
+            app:tint="@color/main_blue_sub" />
+
+        <LinearLayout
+            android:layout_below="@id/title"
+            android:layout_width="320dp"
+            android:layout_height="64dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="3"
+            android:padding="2dp"
+            android:background="@drawable/buy_full_round_box"
+            >
+            <ImageView
+                android:layout_marginHorizontal="4dp"
+                android:padding="4dp"
+                android:background="@drawable/buy_empty_round_box"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_lottery_ticket_blue"
+                />
+            <ImageView
+                android:layout_marginHorizontal="4dp"
+                android:padding="4dp"
+                android:backgroundTint="@color/main_pink_light"
+                android:background="@drawable/buy_empty_round_box"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_lottery_ticket"
+                />
+            <ImageView
+                android:layout_marginHorizontal="4dp"
+                android:padding="4dp"
+                android:backgroundTint="@color/main_pink_light"
+                android:background="@drawable/buy_empty_round_box"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_lottery_ticket_yellow"
+                />
+<!--            <ImageView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_height="80dp"-->
+<!--                android:src="@drawable/ic_buy_lottery_simple_icon"-->
+<!--                />-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@id/title"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            >
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="56dp"
+                android:paddingRight="36dp"
+                android:paddingTop="36dp"
+                android:src="@drawable/ic_coins"
+                />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="56dp"
+                android:paddingRight="36dp"
+                android:paddingTop="36dp"
+                android:src="@drawable/free_movie"
+                />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="56dp"
+                android:paddingRight="36dp"
+                android:paddingTop="36dp"
+                android:src="@drawable/ic_only_now"
+                />
+
+<!--            <ImageView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_height="80dp"-->
+<!--                />-->
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+
+
+
+<!--    Number Check Pad-->
+
+
+    <include
+        android:id="@+id/center"
+        android:layout_below="@id/ticket_options"
+        android:layout_centerHorizontal="true"
+        layout="@layout/component_number_check_pad"
+        android:layout_height="400dp"
+        android:layout_width="322dp"/>
+
+
+
+
+    <!--    Bottom -->
+
+    <LinearLayout
+        android:layout_below="@id/center"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        >
+        <LinearLayout
+            android:id="@+id/random"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_buy_random_icon"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/CustomTextBlue"
+                android:text="자동"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+        <!--    Floating Buy Button -->
+
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            >
+            <ImageView
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_red_button"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/CustomTextWhite"
+                android:text="구매하기"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"/>
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

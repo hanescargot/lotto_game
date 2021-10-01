@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="32dp"
+    android:layout_height="72dp"
+    >
+
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/buy_number_case"
+        android:rotation="180"
+        />
+
+    <TextView
+        android:id="@+id/key_number"
+        android:tag="0"
+        android:layout_centerInParent="true"
+
+        style="@style/CustomTextBlueDark"
+        android:textColor="@color/main_pink_dark"
+        android:layout_width="24dp"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="99"/>
+
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/buy_number_case"
+        />
+
+    <ImageView
+        android:visibility="invisible"
+        android:layout_centerInParent="true"
+        android:layout_width="16dp"
+        android:layout_height="40dp"
+        android:src="#99111111"/>
+
+<!--&lt;!&ndash;    checked box  &ndash;&gt;-->
+
+
+
+
+</RelativeLayout>

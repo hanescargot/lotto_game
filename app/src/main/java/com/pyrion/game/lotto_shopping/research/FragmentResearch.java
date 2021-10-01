@@ -26,7 +26,7 @@ import java.util.HashMap;
 public class FragmentResearch extends Fragment {
 
 //    ImageView ivBingo, ivRanking , ivSearch;
-    HashMap<ImageView, Integer> map = new HashMap<>();
+//    HashMap<ImageView, Integer> map = new HashMap<>();
     ImageView[] ivArray =  new ImageView[3];
     ViewPager2 viewPager;
     View fragmentContainer;
@@ -96,25 +96,40 @@ public class FragmentResearch extends Fragment {
         viewPager.setAdapter(new PagerAdapter( getActivity() ));
 
         ivArray[0] = view.findViewById(R.id.iv_bingo);
-        map.put(view.findViewById(R.id.iv_bingo), 0);
+//        map.put(view.findViewById(R.id.iv_bingo), 0);
 
         ivArray[1] = view.findViewById(R.id.iv_ranking);
-        map.put(view.findViewById(R.id.iv_ranking), 1);
+//        map.put(view.findViewById(R.id.iv_ranking), 1);
 
         ivArray[2] = view.findViewById(R.id.iv_search);
-        map.put(view.findViewById(R.id.iv_search), 2);
+//        map.put(view.findViewById(R.id.iv_search), 2);
 
-        for(ImageView iv : ivArray){
+//        default page
+        viewPager.setCurrentItem( 1, false );
+        setBottomIcon(ivArray[1]);
+
+        for(ImageView iv : ivArray ){
             iv.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View iv_bottom_icon) {
                     //TODO add animation
-                    setBottomIcon((ImageView) v);
-                    viewPager.setCurrentItem( map.get(v), false );
+                    setBottomIcon((ImageView) iv_bottom_icon);
+                    viewPager.setCurrentItem( getBottomIconNum( (ImageView)iv_bottom_icon ), false );
                     fragmentContainer.startAnimation(popupAnimation);
                 }
             });
         }
+    }
+
+    public int getBottomIconNum(ImageView iv){
+        if (ivArray[0].equals(iv)) {
+            return 0;
+        } else if (ivArray[1].equals(iv)) {
+            return 1;
+        } else if (ivArray[2].equals(iv)) {
+            return 2;
+        }
+            return 1;
     }
 
     public void setBottomIcon(ImageView v){

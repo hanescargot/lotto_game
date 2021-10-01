@@ -13,42 +13,54 @@
     android:padding="8dp">
     <TextView
         android:id="@+id/tv_ball_1"
+        style="@style/CustomTextBlueBlack"
         android:gravity="center"
         android:text="1"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/ic_lotto_ball_yellow"/>
     <TextView
+        android:id="@+id/tv_ball_2"
+        style="@style/CustomTextBlueBlack"
         android:gravity="center"
         android:text="10"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/ic_lotto_ball_yellow"/>
     <TextView
+        android:id="@+id/tv_ball_3"
+        style="@style/CustomTextBlueBlack"
         android:gravity="center"
         android:text="11"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/ic_lotto_ball_blue"/>
     <TextView
+        android:id="@+id/tv_ball_4"
+        style="@style/CustomTextBlueBlack"
         android:gravity="center"
         android:text="20"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/ic_lotto_ball_blue"/>
     <TextView
+        android:id="@+id/tv_ball_5"
+        style="@style/CustomTextBlueBlack"
         android:gravity="center"
         android:text="31"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/ic_lotto_ball_purple"/>
     <TextView
+        android:id="@+id/tv_ball_6"
+        style="@style/CustomTextBlueBlack"
         android:gravity="center"
         android:text="41"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/ic_lotto_ball_green"/>
     <ImageView
+        style="@style/CustomTextBlueBlack"
         android:gravity="center"
         android:text="1"
         android:layout_width="40dp"
@@ -57,6 +69,8 @@
         app:tint="@color/grey"
         />
     <TextView
+        android:id="@+id/tv_ball_7"
+        style="@style/CustomTextBlueBlack"
         android:gravity="center"
         android:text="21"
         android:layout_width="40dp"

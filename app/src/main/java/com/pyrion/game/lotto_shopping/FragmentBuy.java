@@ -1,17 +1,14 @@
 package com.pyrion.game.lotto_shopping;
 
-import android.content.Context;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.Toast;
-
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,4 +65,14 @@ public class FragmentBuy extends Fragment {
         return inflater.inflate(R.layout.fragment_buy, container, false);
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        //set number check pad
+        GridView gridView = view.findViewById(R.id.number_pad_gridview);
+        NumberPadAdapter gridAdapter = new NumberPadAdapter(getActivity());
+        gridView.setAdapter(gridAdapter);
+
+    }
 }

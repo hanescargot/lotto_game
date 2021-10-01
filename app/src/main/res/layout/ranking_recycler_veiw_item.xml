@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="72dp"
-    android:backgroundTint="@color/main_blue_sub"
-    android:background="@drawable/auction_round_box_full"
+    android:background="@drawable/auction_empty_round_box"
     android:orientation="horizontal"
     android:layout_margin="4dp"
     android:gravity="center"
@@ -14,24 +13,39 @@
         android:id="@+id/tv_ranking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/CustomTextWhite"
+        style="@style/CustomTextBlueDark"
         android:layout_marginHorizontal="16dp"
         android:text="1위"
         />
 
-    <ImageView
-        android:id="@+id/iv_ball"
+    <FrameLayout
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:src="@drawable/auction_round_money_box_full"
         android:padding="4dp"
         android:layout_marginRight="16dp"
-        />
+
+        android:backgroundTint="@color/main_blue_sub">
+        <ImageView
+            android:id="@+id/iv_ball"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/main_round_money_box"
+            android:src="@drawable/ic_lotto_ball_yellow"
+            android:padding="8dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            style="@style/CustomTextBlueBlack"
+            android:text="24"/>
+    </FrameLayout>
     <TextView
         android:id="@+id/tv_count"
         android:layout_width="wrap_content"
         android:layout_height="72dp"
-        style="@style/CustomTextWhite"
+        style="@style/CustomTextBlueDark"
         android:gravity="center"
         android:text="1982"
         />
@@ -40,9 +54,9 @@
         android:layout_width="wrap_content"
         android:layout_height="72dp"
         android:layout_marginHorizontal="4dp"
-        style="@style/CustomTextWhite"
+        style="@style/CustomTextBlueDark"
         android:gravity="center"
-        android:text="명"
+        android:text="회"
         />
 
     <LinearLayout
