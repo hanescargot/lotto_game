@@ -25,4 +25,11 @@
 <!--    <color name="main_blue_dark">#0F3388</color>-->
 <!--    <color name="custom_black">#FF333333</color>-->
 
+
+<!--    item color -->
+    <color name="bottom_navigation_color">#FF333333</color>
+    <color name="bottom_icon_yellow">#FFC107</color>
+    <color name="bottom_icon_blue">#3F51B5</color>
+    <color name="bottom_icon_purple">#673AB7</color>
+
 </resources>

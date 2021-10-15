@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -17,7 +20,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
-    BottomSheetBehavior bottomSheetBehavior;
+
     public int getItemId(int itemNum){
         switch (itemNum){
             case 0:
@@ -48,47 +51,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        FragmentManager fragmentManager = this.getSupportFragmentManager();
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
-
         bottomNavigationView.setItemIconTintList(null);
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.page_buy:
                         viewPager.setCurrentItem(0);
-//                        fragmentManager.beginTransaction()
-//                                .replace(R.id.fragment_container,FragmentBuy.newInstance("hi","huunju") , null)
-//                                .setReorderingAllowed(true)
-//                                .addToBackStack("bottom_navigation_backstack") // name can be null
-//                                .commitAllowingStateLoss();
+                        bottomIconColor( Color.parseColor("#F26565"));
                         break;
                     case R.id.page_history:
                         viewPager.setCurrentItem(1);
-//                        fragmentManager.beginTransaction()
-//                                .replace(R.id.fragment_container, FragmentHistory.class, null)
-//                                .setReorderingAllowed(true)
-//                                .addToBackStack("bottom_navigation_backstack") // name can be null
-//                                .commitAllowingStateLoss();
+                        bottomIconColor( Color.parseColor("#FFC107"));
                         break;
 
                     case R.id.page_auction:
                         viewPager.setCurrentItem(2);
-//                        fragmentManager.beginTransaction()
-//                                .replace(R.id.fragment_container, FragmentAuction.class, null)
-//                                .setReorderingAllowed(true)
-//                                .addToBackStack("bottom_navigation_backstack") // name can be null
-//                                .commitAllowingStateLoss();
+                        bottomIconColor( Color.parseColor("#3F51B5"));
                         break;
+
                     case R.id.page_research:
                         viewPager.setCurrentItem(3);
-//                        fragmentManager.beginTransaction()
-//                                .replace(R.id.fragment_container, FragmentResearch.class, null)
-//                                .setReorderingAllowed(true)
-//                                .addToBackStack("bottom_navigation_backstack") // name can be null
-//                                .commitAllowingStateLoss();
-
+                        bottomIconColor( Color.parseColor("#673AB7") );
                         break;
                 }
                 return true;
@@ -99,7 +85,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void bidButton(View view) {
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+    public void bottomIconColor(int color){
+        int[][] states = new int[][] {
+                new int[] { android.R.attr.state_enabled  }
+        };
+        int[] colors = new int[] {
+                color
+        };
+        bottomNavigationView.setItemTextColor(new ColorStateList(states, colors));
     }
 }

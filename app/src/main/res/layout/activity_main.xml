@@ -90,9 +90,8 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemTextColor="@color/main_blue_bg"
-        android:background="@color/main_blue_dark"
-        app:itemTextAppearanceActive="@style/BottomNavigation.ActiveItemTextAppearance"
+        android:background="@color/main_blue_bg"
+        app:itemTextColor="@color/main_pink_dark"
         app:menu="@menu/bottom_navigation"/>
 
 </LinearLayout>
