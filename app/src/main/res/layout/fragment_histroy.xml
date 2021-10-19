@@ -46,7 +46,15 @@
     </LinearLayout>
 
     <!--    floating bar -->
-    <include layout="@layout/component_ball_pocket"/>
+    <FrameLayout
+        android:background="@drawable/main_round_money_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_margin="8dp"
+        >
+        <include layout="@layout/component_ball_pocket"/>
+    </FrameLayout>
 
     <TextView
         android:layout_width="200dp"

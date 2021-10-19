@@ -27,7 +27,7 @@
 
 
 <!--    item color -->
-    <color name="bottom_navigation_color">#FF333333</color>
+    <color name="bottom_navigation_color">#777777</color>
     <color name="bottom_icon_yellow">#FFC107</color>
     <color name="bottom_icon_blue">#3F51B5</color>
     <color name="bottom_icon_purple">#673AB7</color>

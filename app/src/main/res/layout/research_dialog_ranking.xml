@@ -14,7 +14,7 @@
     <LinearLayout
         android:layout_centerHorizontal="true"
         android:id="@+id/title"
-        android:paddingHorizontal="16dp"
+        android:paddingHorizontal="8dp"
         android:background="@drawable/auction_empty_round_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -24,7 +24,7 @@
             android:layout_height="48dp"
             android:src="@drawable/ranking_sub_title"/>
         <TextView
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/CustomTextBlueDark"

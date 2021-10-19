@@ -74,5 +74,7 @@ public class FragmentBuy extends Fragment {
         NumberPadAdapter gridAdapter = new NumberPadAdapter(getActivity());
         gridView.setAdapter(gridAdapter);
 
+
+
     }
 }
