@@ -49,29 +49,30 @@
             android:background="@drawable/buy_full_round_box"
             >
             <ImageView
+                android:id="@+id/buy_coin"
+                android:tag="0"
                 android:layout_marginHorizontal="4dp"
                 android:padding="4dp"
-                android:background="@drawable/buy_empty_round_box"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_lottery_ticket_blue"
                 />
             <ImageView
+                android:id="@+id/buy_ad"
+                android:tag="1"
                 android:layout_marginHorizontal="4dp"
                 android:padding="4dp"
-                android:backgroundTint="@color/main_pink_light"
-                android:background="@drawable/buy_empty_round_box"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_lottery_ticket"
                 />
             <ImageView
+                android:id="@+id/buy_time"
+                android:tag="2"
                 android:layout_marginHorizontal="4dp"
                 android:padding="4dp"
-                android:backgroundTint="@color/main_pink_light"
-                android:background="@drawable/buy_empty_round_box"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
@@ -149,21 +150,50 @@
 
     <LinearLayout
         android:layout_below="@id/center"
-        android:layout_width="280dp"
+        android:layout_width="304dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical"
         >
+
+
+<!--        reset button -->
+        <LinearLayout
+            android:id="@+id/reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_baseline_refresh_24"
+                app:tint="@color/main_blue_dark"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/CustomTextBlue"
+                android:text="초기화"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+
+<!--        random button-->
         <LinearLayout
             android:id="@+id/random"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:layout_marginLeft="16dp"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_marginLeft="40dp"
             >
 
             <ImageView
@@ -180,9 +210,9 @@
                 />
 
         </LinearLayout>
+
+
         <!--    Floating Buy Button -->
-
-
         <FrameLayout
             android:layout_width="0dp"
             android:layout_weight="1"

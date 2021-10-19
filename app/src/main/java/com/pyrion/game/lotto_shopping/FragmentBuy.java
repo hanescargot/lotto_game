@@ -4,11 +4,19 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.pyrion.game.lotto_shopping.data.NumberPad;
+import com.pyrion.game.lotto_shopping.data.Ticket;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +33,10 @@ public class FragmentBuy extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
+    GridView gridView;
+    NumberPadAdapter gridAdapter;
 
     public FragmentBuy() {
         // Required empty public constructor
@@ -70,11 +82,86 @@ public class FragmentBuy extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         //set number check pad
-        GridView gridView = view.findViewById(R.id.number_pad_gridview);
-        NumberPadAdapter gridAdapter = new NumberPadAdapter(getActivity());
+        gridView = view.findViewById(R.id.number_pad_gridview);
+        gridAdapter = new NumberPadAdapter(getActivity());
         gridView.setAdapter(gridAdapter);
 
+        View resetBtn = view.findViewById(R.id.reset);
+        resetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //레트로핏 초기화
+                showToast("초기화 완료");
+                NumberPad.buyNumbers = new ArrayList<Integer>();
+
+                gridAdapter.notifyDataSetChanged();
+            }
+        });
+
+        View randomBtn = view.findViewById(R.id.random);
+        randomBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //레트로핏에 아무 값이나 넣기
+                showToast("자동 번호 생성");
+                Random random = new Random();
+                NumberPad.buyNumbers.clear();
+                for (int i=0; i<7; i++){
+                    NumberPad.buyNumbers.add( random.nextInt(45)+1 );
+                }
+                gridAdapter.notifyDataSetChanged();
+            }
+        });
+
+        View buyBtn = view.findViewById(R.id.button);
+        buyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                서버로 보내기
+//                가격 계산하기
+//                롤백 기능
+//
+            }
+        });
+
+        ImageView[] arrayIv = new ImageView[]{
+                view.findViewById(R.id.buy_coin),
+                view.findViewById(R.id.buy_ad),
+                view.findViewById(R.id.buy_time)
+        };
+        for(ImageView iv : arrayIv){
+            int ivTagNum = Integer.parseInt(iv.getTag().toString());
+            if ( ivTagNum==(Ticket.buyTicket) ){
+                iv.setBackground( getResources().getDrawable(R.drawable.buy_empty_round_box) );
+            }
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    for(ImageView iv : arrayIv){
+                        iv.setBackground( getResources().getDrawable(R.drawable.buy_round_box) );
+                    }
+                    ((ImageView)v).setBackground( getResources().getDrawable(R.drawable.buy_empty_round_box) );
+                    Ticket.buyTicket = Integer.parseInt(v.getTag().toString());
+                }
+            });
+        }
 
 
+    }
+
+
+
+    Toast toast;
+    public void showToast( String str ){
+        if(toast != null) {
+            toast.cancel();
+        }
+        toast = Toast.makeText(
+                getActivity(),
+                str,
+                Toast.LENGTH_SHORT
+        );
+        toast.setGravity(Gravity.CENTER_VERTICAL,0,0);
+        toast.show();
     }
 }
