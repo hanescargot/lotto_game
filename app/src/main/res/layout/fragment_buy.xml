@@ -4,56 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentBuy"
-    android:padding="8dp">
+    tools:context=".FragmentBuy">
 
-    <LinearLayout
-        android:id="@+id/noti"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_width="match_parent"
-        android:layout_marginHorizontal="8dp"
-        android:layout_height="40dp"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="8dp"
-        android:orientation="horizontal"
-        android:background="@drawable/box_round_noti"
-        android:backgroundTint="@color/light_grey"
-        >
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:padding="4dp"
-            android:background="@drawable/buy_round_box"
-            android:backgroundTint="@color/grey"
-            android:src="@drawable/ic_baseline_outlined_flag_24" />
-        <TextView
-            android:layout_marginLeft="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="공지사항"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:tint="@color/grey"
-            />
-
-        <TextView
-            android:id="@+id/noti_tv"
-            android:layout_marginLeft="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="아주 긴 공지가 있습니다. 읽든지 말든지 하세요."
-            android:marqueeRepeatLimit="marquee_forever"
-            android:singleLine="true"
-            android:focusable="true"
-            android:ellipsize="marquee"
-            android:maxLines="@integer/material_motion_duration_long_1"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:tint="@color/grey"
-            />
-
-    </LinearLayout>
+    <include layout="@layout/component_noti"/>
 
 
     <RelativeLayout
@@ -61,31 +14,33 @@
         android:layout_below="@id/noti"
         android:id="@+id/ticket_options"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp">
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="28dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp"
-            style="@style/CustomTextBlue"
-            android:textColor="@color/custom_black_blue"
-            android:gravity="center_vertical"
-            android:text="사용할 티켓 선택"/>
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp"
-            android:src="@drawable/ic_baseline_info_24"
-            android:layout_toRightOf="@id/title"
-            app:tint="@color/main_blue_sub" />
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_below="@id/title"
+            android:id="@+id/info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                style="@style/CustomTextBlue"
+                android:textColor="@color/custom_black_blue"
+                android:gravity="center_vertical"
+                android:text="사용할 티켓 선택"/>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/ic_baseline_info_24"
+                android:layout_toRightOf="@id/info"
+                app:tint="@color/main_blue_sub" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@id/info"
             android:layout_width="300dp"
             android:layout_height="64dp"
             android:layout_centerHorizontal="true"
@@ -133,7 +88,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_below="@id/title"
+            android:layout_below="@id/info"
             android:layout_centerHorizontal="true"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -188,7 +143,8 @@
         android:layout_centerHorizontal="true"
         layout="@layout/component_number_check_pad"
         android:layout_height="388dp"
-        android:layout_width="300dp"/>
+        android:layout_width="300dp"
+        android:layout_marginTop="4dp"/>
 
 
 

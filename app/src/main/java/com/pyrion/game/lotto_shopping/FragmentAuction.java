@@ -28,6 +28,7 @@ public class FragmentAuction extends Fragment {
 
     Animation floatAnimation;
     View center, ribbon; //floating animation
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -87,6 +88,7 @@ public class FragmentAuction extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         TextView tv = view.findViewById(R.id.noti_tv);
         tv.setSelected(true);
 
