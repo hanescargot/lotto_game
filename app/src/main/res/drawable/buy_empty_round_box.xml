@@ -7,8 +7,8 @@
         android:radius="16dp"
         />
     <stroke
-        android:width="4dp"
-        android:color="@color/main_pink_light" />
+        android:width="2dp"
+        android:color="@color/main_pink_dark" />
 </shape>
 
 <!--    android:bottomLeftRadius="16dp"-->

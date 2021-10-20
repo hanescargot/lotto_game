@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_below="@id/top_box"
+    android:layout_width="wrap_content"
+    android:layout_height="40dp"
+    android:orientation="horizontal"
+    android:background="@drawable/box_round_noti"
+    android:backgroundTint="@color/main_blue_dark"
+    android:layout_marginHorizontal="4dp"
+    >
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_buy_random_icon"
+        android:background="@drawable/auction_round_money_box_light"
+        android:backgroundTint="@color/main_blue_dark"
+        android:layout_gravity="center"
+        android:padding="4dp"
+        />
+    <TextView
+        android:id="@+id/btn_tv"
+        android:layout_marginRight="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="나의 주문 결과"
+        style="@style/CustomTextWhite"/>
+</LinearLayout>

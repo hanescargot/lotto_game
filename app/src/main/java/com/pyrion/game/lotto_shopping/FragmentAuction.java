@@ -87,6 +87,8 @@ public class FragmentAuction extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        TextView tv = view.findViewById(R.id.noti_tv);
+        tv.setSelected(true);
 
         View invisibleCurrentPrice = view.findViewById(R.id.invisible_current_price);
         View invisibleTimer = view.findViewById(R.id.invisible_timer);

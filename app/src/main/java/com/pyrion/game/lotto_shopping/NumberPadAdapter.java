@@ -19,11 +19,13 @@ public class NumberPadAdapter extends BaseAdapter {
     Integer[] selectableNumbers = new Integer[45];
 
     Context context;
-    public NumberPadAdapter(Context context){
+    ImageView buyBtn;
+    public NumberPadAdapter(Context context, ImageView buyBtn){
         for(int temp = 0; temp<selectableNumbers.length; temp++){
             selectableNumbers[temp] = temp;
         }
         this.context = context;
+        this.buyBtn = buyBtn;
     }
 
     @Override
@@ -65,21 +67,33 @@ public class NumberPadAdapter extends BaseAdapter {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int checked_num = Integer.parseInt( ((TextView)v).getText().toString() );
+                int checkedNum = Integer.parseInt( ((TextView)v).getText().toString() );
+                int numCount = NumberPad.buyNumbers.size();
                 if(iv.getVisibility()==View.VISIBLE){
-                    //체크했던 것 풀기
-                    iv.setVisibility(View.INVISIBLE);
-                    if(NumberPad.buyNumbers.indexOf(checked_num)!=-1){
-                        NumberPad.buyNumbers.remove(NumberPad.buyNumbers.indexOf(checked_num));
+                    if(numCount==6){
+                        // button 비활성화
+                        buyBtn.setImageResource(R.drawable.ic_red_button_grey);
                     }
+                    //이미 체크되어 있었던 것 클릭
+                    iv.setVisibility(View.INVISIBLE);
+                    if(NumberPad.buyNumbers.indexOf(checkedNum)!=-1){
+                        NumberPad.buyNumbers.remove(NumberPad.buyNumbers.indexOf(checkedNum));
+                    }
+                    return;
                 }
-                else if (NumberPad.buyNumbers.size()>6){
-                        //7개 모두 체크함
-                        showToast("7개 선택 가능");
-                        return;
-                }else{
-                    iv.setVisibility(View.VISIBLE);
-                    NumberPad.buyNumbers.add(checked_num);
+                if(numCount==6){
+                    //6개 모두 체크 해 놓은 상태일 때
+                    showToast("6개 선택 가능");
+                    return;
+                }
+
+                //새 번호 체크 하기
+                iv.setVisibility(View.VISIBLE);
+                NumberPad.buyNumbers.add(checkedNum);
+
+                if(numCount==5){
+                    // button 활성화
+                    buyBtn.setImageResource(R.drawable.ic_red_button);
                 }
             }
         });

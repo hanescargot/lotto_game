@@ -7,6 +7,8 @@ public class NumberPad {
     public static ArrayList<Integer> buyNumbers = new ArrayList<>();
 
 
+
+
     // data update
 //    String data = new Gson().toJson(prefNumArray);
 //                Log.i("num_arr_update", data);

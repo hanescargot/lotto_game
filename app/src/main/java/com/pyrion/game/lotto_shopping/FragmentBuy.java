@@ -1,5 +1,7 @@
 package com.pyrion.game.lotto_shopping;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,10 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pyrion.game.lotto_shopping.data.NumberPad;
 import com.pyrion.game.lotto_shopping.data.Ticket;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -34,6 +39,8 @@ public class FragmentBuy extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    TextView tv;
+    ImageView[] arrayIv;
 
     GridView gridView;
     NumberPadAdapter gridAdapter;
@@ -76,14 +83,14 @@ public class FragmentBuy extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_buy, container, false);
     }
-
+ImageView buyBtn;
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        buyBtn = view.findViewById(R.id.button);
         //set number check pad
         gridView = view.findViewById(R.id.number_pad_gridview);
-        gridAdapter = new NumberPadAdapter(getActivity());
+        gridAdapter = new NumberPadAdapter(getActivity(), buyBtn);
         gridView.setAdapter(gridAdapter);
 
         View resetBtn = view.findViewById(R.id.reset);
@@ -92,9 +99,10 @@ public class FragmentBuy extends Fragment {
             public void onClick(View v) {
                 //레트로핏 초기화
                 showToast("초기화 완료");
-                NumberPad.buyNumbers = new ArrayList<Integer>();
+                NumberPad.buyNumbers.clear();
 
                 gridAdapter.notifyDataSetChanged();
+                buyBtn.setImageResource(R.drawable.ic_red_button_grey);
             }
         });
 
@@ -103,13 +111,20 @@ public class FragmentBuy extends Fragment {
             @Override
             public void onClick(View v) {
                 //레트로핏에 아무 값이나 넣기
-                showToast("자동 번호 생성");
+
                 Random random = new Random();
-                NumberPad.buyNumbers.clear();
-                for (int i=0; i<7; i++){
-                    NumberPad.buyNumbers.add( random.nextInt(45)+1 );
+                int newNumCount = NumberPad.buyNumbers.size();
+                if(newNumCount == 6){
+                    showToast("이미 모든 번호가 선택되어 있습니다");
+                }else{
+                    showToast("자동 번호 생성");
+                    for (int i=0; i<(6-newNumCount); i++){
+                        NumberPad.buyNumbers.add( random.nextInt(45)+1 );
+                    }
+                    gridAdapter.notifyDataSetChanged();
+                    buyBtn.setImageResource(R.drawable.ic_red_button);
                 }
-                gridAdapter.notifyDataSetChanged();
+
             }
         });
 
@@ -124,7 +139,10 @@ public class FragmentBuy extends Fragment {
             }
         });
 
-        ImageView[] arrayIv = new ImageView[]{
+        tv = view.findViewById(R.id.number_pad_text);
+        tv.setText(Ticket.getNumPadText());
+
+        arrayIv = new ImageView[]{
                 view.findViewById(R.id.buy_coin),
                 view.findViewById(R.id.buy_ad),
                 view.findViewById(R.id.buy_time)
@@ -138,13 +156,20 @@ public class FragmentBuy extends Fragment {
                 @Override
                 public void onClick(View v) {
                     for(ImageView iv : arrayIv){
-                        iv.setBackground( getResources().getDrawable(R.drawable.buy_round_box) );
+//                        iv.setImageTintList( ColorStateList.valueOf(Color.parseColor("#777777")) );
+//                        iv.setBackground( getResources().getDrawable(R.drawable.buy_round_box) );
+                        iv.setBackground( null );
                     }
-                    ((ImageView)v).setBackground( getResources().getDrawable(R.drawable.buy_empty_round_box) );
                     Ticket.buyTicket = Integer.parseInt(v.getTag().toString());
+                    tv.setText(Ticket.getNumPadText());
+//                    ((ImageView)v).setImageTintList( null );
+                    ((ImageView)v).setBackground( getResources().getDrawable(R.drawable.buy_empty_round_box) );
                 }
             });
         }
+
+        TextView tv = view.findViewById(R.id.noti_tv);
+        tv.setSelected(true);
 
 
     }
