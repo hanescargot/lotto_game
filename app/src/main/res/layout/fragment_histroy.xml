@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             >
             <ImageButton
+                android:id="@+id/btn_left"
                 android:layout_alignParentLeft="true"
                 android:layout_width="72dp"
                 android:layout_height="match_parent"
@@ -27,15 +28,17 @@
                 android:src="@drawable/ic_baseline_arrow_left_24"
                 />
             <TextView
+                android:id="@+id/drw_no"
                 android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/CustomTextWhite"
                 android:textSize="20sp"
-                android:text="287 회"/>
+                android:text="1 회"/>
 
 
             <ImageButton
+                android:id="@+id/btn_right"
                 android:layout_alignParentRight="true"
                 android:layout_width="72dp"
                 android:layout_height="match_parent"

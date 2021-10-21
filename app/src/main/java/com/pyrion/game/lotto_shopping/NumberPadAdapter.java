@@ -56,9 +56,7 @@ public class NumberPadAdapter extends BaseAdapter {
         textView.setText((position+1)+"");
         ImageView iv = convertView.findViewById(R.id.iv);
 
-        Log.i("num_arr_R",NumberPad.buyNumbers+"");
         int checkedNum = Integer.parseInt(textView.getText().toString());
-        Log.i("contain", checkedNum +"");
         iv.setVisibility(View.INVISIBLE);
         if (NumberPad.buyNumbers.contains(checkedNum)){
             iv.setVisibility(View.VISIBLE);

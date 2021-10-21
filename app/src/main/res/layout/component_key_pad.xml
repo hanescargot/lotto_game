@@ -288,7 +288,7 @@
                     android:layout_marginRight="8dp"
                     android:textColor="@color/main_blue_bg"
                     android:textStyle="bold"
-                    android:text="확인"
+                    android:text="주문"
                     />
                 <Button
                     android:layout_height="match_parent"

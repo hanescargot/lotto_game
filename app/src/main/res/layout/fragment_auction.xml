@@ -20,7 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_below="@id/noti">
+            android:layout_below="@id/noti"
+            >
             <include layout="@layout/component_auction_btn"/>
             <include layout="@layout/component_auction_btn2"/>
             <include layout="@layout/component_auction_btn3"/>
