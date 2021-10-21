@@ -148,7 +148,7 @@ ImageView buyBtn;
         };
         for(ImageView iv : arrayIv){
             int ivTagNum = Integer.parseInt(iv.getTag().toString());
-            if ( ivTagNum==(Ticket.buyTicket) ){
+            if ( ivTagNum==(Ticket.selected) ){
                 iv.setBackground( getResources().getDrawable(R.drawable.buy_empty_round_box) );
             }
             iv.setOnClickListener(new View.OnClickListener() {
@@ -159,7 +159,7 @@ ImageView buyBtn;
 //                        iv.setBackground( getResources().getDrawable(R.drawable.buy_round_box) );
                         iv.setBackground( null );
                     }
-                    Ticket.buyTicket = Integer.parseInt(v.getTag().toString());
+                    Ticket.selected = Integer.parseInt(v.getTag().toString());
                     tvNumPad.setText(Ticket.getNumPadText());
 //                    ((ImageView)v).setImageTintList( null );
                     ((ImageView)v).setBackground( getResources().getDrawable(R.drawable.buy_empty_round_box) );

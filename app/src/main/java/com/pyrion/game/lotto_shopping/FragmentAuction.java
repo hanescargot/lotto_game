@@ -4,18 +4,21 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.pyrion.game.lotto_shopping.data.Auction;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,6 +72,7 @@ public class FragmentAuction extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -82,7 +86,7 @@ public class FragmentAuction extends Fragment {
     public void onResume() {
         super.onResume();
         center.startAnimation(floatAnimation);
-        ribbon.startAnimation(floatAnimation);
+//        ribbon.startAnimation(floatAnimation);
     }
 
     @Override
@@ -97,7 +101,7 @@ public class FragmentAuction extends Fragment {
         View all = view.findViewById(R.id.all);
 
         center = view.findViewById(R.id.center);
-        ribbon = view.findViewById(R.id.ribbon);
+//        ribbon = view.findViewById(R.id.ribbon);
 
         //pop up bottom sheet button
         ImageButton bsIvButton = view.findViewById(R.id.bs_button);
@@ -155,9 +159,22 @@ public class FragmentAuction extends Fragment {
             }
         });
 
-        ;
-    }
 
+        tvTimer1 = view.findViewById(R.id.timer1);
+        tvTimer2 = view.findViewById(R.id.timer2);
+        handler = new Handler(){
+            public void handleMessage(Message msg) {
+                tvTimer1.setText(Auction.getLeftTime());
+                tvTimer2.setText(Auction.getLeftTime());
+            }
+        };
+        setTimerTask();
+
+
+    }
+    Handler handler;
+    TextView tvTimer1;
+    TextView tvTimer2;
     public void setBottomSheetState(){
         if( bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED){
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -166,6 +183,21 @@ public class FragmentAuction extends Fragment {
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             bsFoldButton.setRotation(270);
         }
+    }
+
+
+
+
+
+    public void setTimerTask(){
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask(){
+            public void run(){
+                Message msg = handler.obtainMessage();
+                handler.sendMessage(msg);
+            }
+        };
+        timer.scheduleAtFixedRate(task, 0, 1000); //1000ms = 1sec
     }
 
 }
