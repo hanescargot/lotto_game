@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class NumberPad {
 
     public static ArrayList<Integer> buyNumbers = new ArrayList<>();
+    public static ArrayList<Integer> researchNumbers = new ArrayList<>();
 
 
 

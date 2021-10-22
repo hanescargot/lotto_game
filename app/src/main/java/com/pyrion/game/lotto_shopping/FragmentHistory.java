@@ -144,7 +144,7 @@ public class FragmentHistory extends Fragment {
             for (int i=0; i<nums.length; i++){
                 int num = nums[i];
                 tvBallNum[i].setText(num+"");
-                tvBallNum[i].setBackground( getBgSrc(num) );
+                tvBallNum[i].setBackgroundResource( getBgSrc(num) );
             }
             Log.i("memory_t", nums+"");
             return;
@@ -162,7 +162,7 @@ public class FragmentHistory extends Fragment {
                         for (int i=0; i<lotto_key.length; i++){
                             int num = data.get(lotto_key[i]).intValue();
                             tvBallNum[i].setText(num+"");
-                            tvBallNum[i].setBackground( getBgSrc(num) );
+                            tvBallNum[i].setBackgroundResource( getBgSrc(num) );
                             numbers[i] = num;
                         }
                         Lotto.lottoNumberHash.put(drwNo, numbers);
@@ -182,28 +182,28 @@ public class FragmentHistory extends Fragment {
 
 
 
-    public Drawable getBgSrc(int num){
+    public int getBgSrc(int num){
         int colorNum = num/10;
         Log.i("cor", colorNum+"");
-        Drawable bgSrc;
+        int bgSrc;
         switch (colorNum){
             case 0:
-                bgSrc=getResources().getDrawable(R.drawable.ic_lotto_ball_yellow);
+                bgSrc=R.drawable.ic_lotto_ball_yellow;
                 break;
             case 1:
-                bgSrc=getResources().getDrawable(R.drawable.ic_lotto_ball_blue);
+                bgSrc=R.drawable.ic_lotto_ball_blue;
                 break;
             case 2:
-                bgSrc=getResources().getDrawable(R.drawable.ic_lotto_ball_purple);
+                bgSrc=R.drawable.ic_lotto_ball_purple;
                 break;
             case 3:
-                bgSrc=getResources().getDrawable(R.drawable.ic_lotto_ball_green);
+                bgSrc=R.drawable.ic_lotto_ball_green;
                 break;
             case 4:
-                bgSrc=getResources().getDrawable(R.drawable.ic_lotto_ball_red);
+                bgSrc=R.drawable.ic_lotto_ball_red;
                 break;
             default:
-                bgSrc=getResources().getDrawable(R.drawable.ic_lotto_ball_yellow);
+                bgSrc=R.drawable.ic_lotto_ball_yellow;
         }
         return bgSrc;
     }

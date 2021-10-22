@@ -4,9 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.pyrion.game.lotto_shopping.NumberPadAdapter;
 import com.pyrion.game.lotto_shopping.R;
 
 /**
@@ -61,5 +66,18 @@ public class DialogFragmentSearch extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.research_dialog_search, container, false);
+    }
+
+    GridView gridView;
+    NumberPadAdapter gridAdapter;
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        View btn = view.findViewById(R.id.btn);
+
+        gridView = view.findViewById(R.id.number_pad_gridview);
+        gridAdapter = new NumberPadAdapter(getActivity(), btn);
+        gridView.setAdapter(gridAdapter);
     }
 }

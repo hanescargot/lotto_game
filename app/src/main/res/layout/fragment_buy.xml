@@ -230,6 +230,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_red_button_grey"
+                android:clickable="true"
                 />
             <TextView
                 android:layout_width="match_parent"

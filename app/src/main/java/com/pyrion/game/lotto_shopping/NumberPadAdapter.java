@@ -2,7 +2,6 @@ package com.pyrion.game.lotto_shopping;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,18 +13,37 @@ import android.widget.Toast;
 
 import com.pyrion.game.lotto_shopping.data.NumberPad;
 
+import java.util.ArrayList;
+
 public class NumberPadAdapter extends BaseAdapter {
     SharedPreferences sharedPref;
     Integer[] selectableNumbers = new Integer[45];
 
     Context context;
-    ImageView buyBtn;
-    public NumberPadAdapter(Context context, ImageView buyBtn){
+    ImageView btnBuy;
+    View btnSearch;
+    Boolean isDialog = false;
+
+    ArrayList<Integer> numberPadNumAddress;
+
+    public NumberPadAdapter(Context context,View btn){
+        isDialog = true;
+        this.context = context;
         for(int temp = 0; temp<selectableNumbers.length; temp++){
             selectableNumbers[temp] = temp;
         }
+        btnSearch = btn;
+        numberPadNumAddress = NumberPad.researchNumbers;
+
+    }
+    public NumberPadAdapter(Context context, ImageView buyBtn){
         this.context = context;
-        this.buyBtn = buyBtn;
+        this.btnBuy = buyBtn;
+        for(int temp = 0; temp<selectableNumbers.length; temp++){
+            selectableNumbers[temp] = temp;
+        }
+        numberPadNumAddress = NumberPad.buyNumbers;
+
     }
 
     @Override
@@ -58,7 +76,7 @@ public class NumberPadAdapter extends BaseAdapter {
 
         int checkedNum = Integer.parseInt(textView.getText().toString());
         iv.setVisibility(View.INVISIBLE);
-        if (NumberPad.buyNumbers.contains(checkedNum)){
+        if (numberPadNumAddress.contains(checkedNum)){
             iv.setVisibility(View.VISIBLE);
         }
 
@@ -66,16 +84,20 @@ public class NumberPadAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 int checkedNum = Integer.parseInt( ((TextView)v).getText().toString() );
-                int numCount = NumberPad.buyNumbers.size();
+                int numCount = numberPadNumAddress.size();
                 if(iv.getVisibility()==View.VISIBLE){
                     if(numCount==6){
-                        // button 비활성화
-                        buyBtn.setImageResource(R.drawable.ic_red_button_grey);
+                        if(isDialog){
+                            btnSearch.setBackgroundResource(R.drawable.auction_round_box_full_subblue);
+                        }else {
+                            // button 비활성화
+                            btnBuy.setImageResource(R.drawable.ic_red_button_grey);
+                        }
                     }
                     //이미 체크되어 있었던 것 클릭
                     iv.setVisibility(View.INVISIBLE);
-                    if(NumberPad.buyNumbers.indexOf(checkedNum)!=-1){
-                        NumberPad.buyNumbers.remove(NumberPad.buyNumbers.indexOf(checkedNum));
+                    if(numberPadNumAddress.indexOf(checkedNum)!=-1){
+                        numberPadNumAddress.remove(numberPadNumAddress.indexOf(checkedNum));
                     }
                     return;
                 }
@@ -87,11 +109,16 @@ public class NumberPadAdapter extends BaseAdapter {
 
                 //새 번호 체크 하기
                 iv.setVisibility(View.VISIBLE);
-                NumberPad.buyNumbers.add(checkedNum);
+                numberPadNumAddress.add(checkedNum);
 
                 if(numCount==5){
-                    // button 활성화
-                    buyBtn.setImageResource(R.drawable.ic_red_button);
+                    if(isDialog){
+                        //todo
+                        btnSearch.setBackgroundResource(R.drawable.clickable_btn_blue);
+                    }else {
+                        // button 활성화
+                        btnBuy.setImageResource(R.drawable.clickable_btn_red);
+                    }
                 }
             }
         });

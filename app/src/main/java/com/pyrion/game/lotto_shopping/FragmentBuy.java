@@ -121,7 +121,7 @@ ImageView buyBtn;
                         NumberPad.buyNumbers.add( random.nextInt(45)+1 );
                     }
                     gridAdapter.notifyDataSetChanged();
-                    buyBtn.setImageResource(R.drawable.ic_red_button);
+                    buyBtn.setImageResource(R.drawable.clickable_btn_red);
                 }
 
             }
