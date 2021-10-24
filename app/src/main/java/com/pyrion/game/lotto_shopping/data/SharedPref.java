@@ -3,9 +3,11 @@ package com.pyrion.game.lotto_shopping.data;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Adapter;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.pyrion.game.lotto_shopping.histroy.AdapterBoughtTickets;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ public class SharedPref {
     public static SharedPreferences.Editor editor;
     public static Type ticketType = new TypeToken< ArrayList<ArrayList<Integer>> >(){}.getType();
     public static String ticketKey = "week_bought_tickets";
+    public static AdapterBoughtTickets adapterHistory = null;
 
     public SharedPref(Context context) {
         gson = new Gson();

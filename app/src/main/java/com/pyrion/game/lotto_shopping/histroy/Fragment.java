@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import com.pyrion.game.lotto_shopping.R;
 import com.pyrion.game.lotto_shopping.data.Auction;
 import com.pyrion.game.lotto_shopping.data.Lotto;
+import com.pyrion.game.lotto_shopping.data.SharedPref;
 
 import java.util.HashMap;
 import java.util.Timer;
@@ -88,7 +89,7 @@ public class Fragment extends androidx.fragment.app.Fragment {
     TextView tvDrwNo, tvNoTickets;
     TextView tvTimer;
     View resultBalls;
-    AdapterBoughtTickets adapter;
+    AdapterBoughtTickets adapterHistory;
     @Override
     public void onViewCreated(View view,  Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -99,8 +100,9 @@ public class Fragment extends androidx.fragment.app.Fragment {
         tvTimer = view.findViewById(R.id.tv_timer);
         resultBalls = view.findViewById(R.id.result_balls);
         tvNoTickets = view.findViewById(R.id.tv_no_tickets);
-        adapter = new AdapterBoughtTickets(getActivity(), tvNoTickets);//SharedPref.getData("week_bought_tickets", )
-        recyclerView.setAdapter( adapter );
+        adapterHistory = new AdapterBoughtTickets(getActivity(), tvNoTickets);//SharedPref.getData("week_bought_tickets", )
+        SharedPref.adapterHistory  = adapterHistory;
+        recyclerView.setAdapter(adapterHistory);
 
 
         tvDrwNo = view.findViewById(R.id.drw_no);
@@ -167,7 +169,7 @@ public class Fragment extends androidx.fragment.app.Fragment {
     RequestQueue requestQueue;
     String[] key = {"drwtNo1", "drwtNo2", "drwtNo3", "drwtNo4", "drwtNo5", "drwtNo6", "bnusNo"};
     public void setLottoBall(int drwNo){
-        adapter.notifyDataSetChanged();
+        adapterHistory.notifyDataSetChanged();
         if(drwNo == (Lotto.latestDrwNo+1)){
             //아직 당첨 결과가 없는 주
             tvTimer.setVisibility(View.VISIBLE);

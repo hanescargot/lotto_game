@@ -145,6 +145,9 @@ public class FragmentBuy extends Fragment {
                 Collections.sort(newNumbers);
                 User.weekBoughtTickets.add(  newNumbers );
                 SharedPref.editData(SharedPref.ticketKey, User.weekBoughtTickets);
+                if(SharedPref.adapterHistory != null){
+                    SharedPref.adapterHistory.notifyDataSetChanged();
+                }
 //                서버로 보내기
 //                가격 계산하기
 //                롤백 기능
