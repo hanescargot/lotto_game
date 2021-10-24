@@ -16,7 +16,6 @@ import com.pyrion.game.lotto_shopping.data.NumberPad;
 import java.util.ArrayList;
 
 public class NumberPadAdapter extends BaseAdapter {
-    SharedPreferences sharedPref;
     Integer[] selectableNumbers = new Integer[45];
 
     Context context;
@@ -26,7 +25,7 @@ public class NumberPadAdapter extends BaseAdapter {
 
     ArrayList<Integer> numberPadNumAddress;
 
-    public NumberPadAdapter(Context context,View btn){
+    public NumberPadAdapter(Context context, View btn){
         isDialog = true;
         this.context = context;
         for(int temp = 0; temp<selectableNumbers.length; temp++){
@@ -68,7 +67,6 @@ public class NumberPadAdapter extends BaseAdapter {
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.component_number_check_pad_item, null);
         }
-        sharedPref = context.getSharedPreferences("buy", Context.MODE_PRIVATE); // 파일이름 'buy'
 
         TextView textView = convertView.findViewById(R.id.key_number);
         textView.setText((position+1)+"");

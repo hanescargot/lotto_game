@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pyrion.game.lotto_shopping.data.NumberPad;
+import com.pyrion.game.lotto_shopping.data.SharedPref;
 import com.pyrion.game.lotto_shopping.data.Ticket;
+import com.pyrion.game.lotto_shopping.data.User;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -36,6 +41,7 @@ public class FragmentBuy extends Fragment {
 
     TextView tvNumPad;
     ImageView[] arrayIv;
+    ImageView buyBtn;
 
     GridView gridView;
     NumberPadAdapter gridAdapter;
@@ -78,7 +84,7 @@ public class FragmentBuy extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_buy, container, false);
     }
-ImageView buyBtn;
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -118,7 +124,11 @@ ImageView buyBtn;
                 }else{
                     showToast("자동 번호 생성");
                     for (int i=0; i<(6-newNumCount); i++){
-                        NumberPad.buyNumbers.add( random.nextInt(45)+1 );
+                        int newNum = random.nextInt(45)+1;
+                        while (NumberPad.buyNumbers.contains(newNum)){
+                            newNum = random.nextInt(45)+1;
+                        }
+                        NumberPad.buyNumbers.add( newNum );
                     }
                     gridAdapter.notifyDataSetChanged();
                     buyBtn.setImageResource(R.drawable.clickable_btn_red);
@@ -127,13 +137,21 @@ ImageView buyBtn;
             }
         });
 
-        View buyBtn = view.findViewById(R.id.button);
         buyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(NumberPad.buyNumbers.size()!=6){ return; }
+                ArrayList<Integer> newNumbers =  (ArrayList<Integer>)NumberPad.buyNumbers.clone();
+                Collections.sort(newNumbers);
+                User.weekBoughtTickets.add(  newNumbers );
+                SharedPref.editData(SharedPref.ticketKey, User.weekBoughtTickets);
 //                서버로 보내기
 //                가격 계산하기
 //                롤백 기능
+                showToast("구매 완료");
+                NumberPad.buyNumbers.clear();
+                gridAdapter.notifyDataSetChanged();
+                buyBtn.setImageResource(R.drawable.ic_red_button_grey);
 //
             }
         });

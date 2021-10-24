@@ -4,10 +4,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.pyrion.game.lotto_shopping.FragmentAuction;
-import com.pyrion.game.lotto_shopping.FragmentBuy;
-import com.pyrion.game.lotto_shopping.FragmentHistory;
-
 
 public class PagerAdapter extends FragmentStateAdapter {
 

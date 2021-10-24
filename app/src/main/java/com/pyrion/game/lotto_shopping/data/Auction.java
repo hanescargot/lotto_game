@@ -8,12 +8,12 @@ public class Auction {
     public static double auctionTimer = 10000;
     public static String endTimeString = "2021-11-30 23:59:59";
 
-    public static String getLeftTime() {
+    public static String getLeftTime(String endTIme) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date currentTime = new Date();
         Date endTime = new Date();
         try {
-            endTime = dateFormat.parse(endTimeString);
+            endTime = dateFormat.parse(endTIme);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -30,7 +30,7 @@ public class Auction {
 
 
 
-        return (day+"일 "+hour+"시 "+min+"분 "+sec+"초"); //서버로 부터 경매가 끝나는 날짜 받아와서 Double로 바꾸기9/4
+        return (day+"일 "+hour+"시간 "+min+"분 "+sec+"초"); //서버로 부터 경매가 끝나는 날짜 받아와서 Double로 바꾸기9/4
     }
 
 }

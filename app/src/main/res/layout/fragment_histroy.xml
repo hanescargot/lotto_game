@@ -57,6 +57,14 @@
         android:layout_margin="8dp"
         >
         <include layout="@layout/component_ball_pocket"/>
+        <TextView
+            android:id="@+id/tv_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="당첨 결과까지 4일 24시 12분 10초 남음"
+            style="@style/CustomTextBlueDark"
+            />
     </FrameLayout>
 
     <TextView
@@ -73,11 +81,13 @@
         android:layout_height="0dp"
         android:layout_weight="1">
         <androidx.recyclerview.widget.RecyclerView
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             />
         <TextView
+            android:id="@+id/tv_no_tickets"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

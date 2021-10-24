@@ -1,27 +1,27 @@
 package com.pyrion.game.lotto_shopping;
 
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.pyrion.game.lotto_shopping.histroy.Fragment;
 import com.pyrion.game.lotto_shopping.research.FragmentResearch;
 
 
 public class MainPagerAdapter extends FragmentStateAdapter {
 
-    Fragment[] fragments = new Fragment[4];
+    androidx.fragment.app.Fragment[] fragments = new androidx.fragment.app.Fragment[4];
 
     public MainPagerAdapter(FragmentActivity fragmentActivity){
         super(fragmentActivity);
 
         fragments[0] = new FragmentBuy();
-        fragments[1] = new FragmentHistory();
+        fragments[1] = new Fragment();
         fragments[2] = new FragmentAuction();
         fragments[3] = new FragmentResearch();
 
     }
     @Override
-    public Fragment createFragment(int position) {
+    public androidx.fragment.app.Fragment createFragment(int position) {
         return fragments[position];
     }
 

@@ -2,29 +2,20 @@ package com.pyrion.game.lotto_shopping;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.pyrion.game.lotto_shopping.data.Lotto;
+import com.pyrion.game.lotto_shopping.data.SharedPref;
+import com.pyrion.game.lotto_shopping.data.User;
 
-import java.text.ParseException;
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -90,11 +81,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
 //        DB
-        try {
-            Lotto.currentDrwNo = Lotto.getCurrentDrwNo();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        new SharedPref(this);
+        Lotto.latestDrwNo = Lotto.getLatestDrwNo();
+        User.weekBoughtTickets =(ArrayList< ArrayList<Integer> >)SharedPref.getData(SharedPref.ticketKey, SharedPref.ticketType);
 
 
     }

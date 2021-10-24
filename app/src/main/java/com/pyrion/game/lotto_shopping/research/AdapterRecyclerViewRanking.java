@@ -1,6 +1,7 @@
 package com.pyrion.game.lotto_shopping.research;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,6 @@ public class AdapterRecyclerViewRanking extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
-
         //todo view 값 setting 하기
 
     }
@@ -44,20 +44,17 @@ public class AdapterRecyclerViewRanking extends RecyclerView.Adapter {
 
     class ViewHolder extends RecyclerView.ViewHolder{
         private final ImageView ivBall;
+        private final TextView tvRanking, tvCount;
 
         public ImageView getIvBall() {
             return ivBall;
         }
-
         public TextView getTvRanking() {
             return tvRanking;
         }
-
         public TextView getTvCount() {
             return tvCount;
         }
-
-        private final TextView tvRanking, tvCount;
 
         public ViewHolder(View itemView) {
             super(itemView);

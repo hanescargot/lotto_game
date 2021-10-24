@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:id="@+id/result_balls"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_below="@+id/info"
-    android:layout_gravity="center"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="16dp"
     android:orientation="horizontal"
     android:gravity="center">
     <TextView
@@ -57,21 +57,18 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/ic_lotto_ball_green"/>
-    <ImageView
-        style="@style/CustomTextBlueBlack"
-        android:gravity="center"
-        android:text="1"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_baseline_add_24"
-        app:tint="@color/grey"
-        />
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"/>
+
     <TextView
-        android:id="@+id/tv_ball_7"
-        style="@style/CustomTextBlueBlack"
-        android:gravity="center"
-        android:text="21"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/ic_lotto_ball_red"/>
+        android:id="@+id/tv_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/CustomTextBlueDark"
+        android:text="꽝"
+        />
+<!--    x등 당첨   -->
 </LinearLayout>

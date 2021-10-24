@@ -164,8 +164,9 @@ public class FragmentAuction extends Fragment {
         tvTimer2 = view.findViewById(R.id.timer2);
         handler = new Handler(){
             public void handleMessage(Message msg) {
-                tvTimer1.setText(Auction.getLeftTime());
-                tvTimer2.setText(Auction.getLeftTime());
+                String endTimeString = "2021-11-30 23:59:59";//todo change
+                tvTimer1.setText(Auction.getLeftTime(endTimeString));
+                tvTimer2.setText(Auction.getLeftTime(endTimeString));
             }
         };
         setTimerTask();
