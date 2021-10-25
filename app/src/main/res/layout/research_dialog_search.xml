@@ -61,6 +61,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:background="@drawable/auction_round_box_full_subblue"
+                android:tag="unactivated"
                 android:clickable="true"
                 >
                 <ImageView

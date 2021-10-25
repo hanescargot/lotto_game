@@ -16,6 +16,7 @@ import com.pyrion.game.lotto_shopping.data.SharedPref;
 import com.pyrion.game.lotto_shopping.data.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -80,14 +81,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        DB
+//        DB !!!!!!!!!!!!!!!!!! pref -> public
         new SharedPref(this);
-        Lotto.latestDrwNo = Lotto.getLatestDrwNo();
-        User.weekBoughtTickets =(ArrayList< ArrayList<Integer> >)SharedPref.getData(SharedPref.ticketKey, SharedPref.ticketType);
-
-
+        new Lotto(this);
+        User.weekBoughtTickets = (ArrayList<User.TicketDB>)SharedPref.getData(SharedPref.ticketKey, SharedPref.ticketType);
+        Lotto.hashHistoryResults = (HashMap<Integer, Lotto.HistoryResultNumberDB>)SharedPref.getData(SharedPref.hashResultsKey, SharedPref.hashResultsType);
     }
-
 
     public void bottomIconColor(int color){
         int[][] states = new int[][] {
@@ -102,5 +101,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void getCurrentLottoDB(){
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        //DB!!!   public -> pref
+        SharedPref.editData(SharedPref.hashResultsKey,Lotto.hashHistoryResults);
     }
 }

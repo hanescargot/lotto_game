@@ -13,14 +13,13 @@ import com.pyrion.game.lotto_shopping.R;
 import com.pyrion.game.lotto_shopping.data.Lotto;
 import com.pyrion.game.lotto_shopping.data.User;
 
-import org.w3c.dom.Text;
-
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class AdapterBoughtTickets extends RecyclerView.Adapter {
     Context context;
     TextView tvNoTickets;
-    ArrayList< ArrayList<Integer> > tickets;
+    ArrayList< User.TicketDB > tickets;
     LayoutInflater inflater;
     Boolean isHistory;
     public AdapterBoughtTickets(Context context, TextView tvNoTickets){
@@ -31,32 +30,10 @@ public class AdapterBoughtTickets extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.i("balls","create");
         View itemView = inflater.inflate(R.layout.component_ticket_nums_item, parent, false);
         return new ViewHolder( itemView );
     }
 
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ViewHolder viewHolder = (ViewHolder)holder;
-
-        ArrayList<Integer> balls =  tickets.get(position);
-        for(int i=0; i<viewHolder.getBallTextViews().length; i++){
-            TextView tvBall = viewHolder.getBallTextViews()[i];
-            tvBall.setText(balls.get(i)+"");
-            tvBall.setBackgroundResource(Lotto.getBgSrc( balls.get(i)) );
-        }
-        if(isHistory){
-            //당첨결과 발표된 회차
-            int resultCode = balls.get( balls.size()-1 );
-            String result = Lotto.getResultString( resultCode );
-            viewHolder.tvResult.setText(result);
-        }else{
-            //아직 당첨결과 발표되지 않은 회차
-            viewHolder.tvResult.setText("대기중");
-
-        }
-    }
 
     @Override
     public int getItemCount() {
@@ -65,7 +42,7 @@ public class AdapterBoughtTickets extends RecyclerView.Adapter {
             if(User.historyBoughtTickets.containsKey(Lotto.selectedDrwNo)){
                 tickets = User.historyBoughtTickets.get(Lotto.selectedDrwNo);
             }else{
-                tickets = new ArrayList<>();
+                tickets.clear();
             }
         }else{
             tickets =  User.weekBoughtTickets;
@@ -74,6 +51,26 @@ public class AdapterBoughtTickets extends RecyclerView.Adapter {
         if(tickets.size()==0){tvNoTickets.setVisibility(View.VISIBLE);
         }else {tvNoTickets.setVisibility(View.INVISIBLE);}
         return tickets.size();
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        ViewHolder viewHolder = (ViewHolder)holder;
+        User.TicketDB ticket = tickets.get(position);
+        for(int i=0; i<viewHolder.getBallTextViews().length; i++){
+            TextView tvBall = viewHolder.getBallTextViews()[i];
+            tvBall.setText(ticket.getNumbers().get(i)+"");
+            tvBall.setBackgroundResource(Lotto.getBgSrc( ticket.getNumbers().get(i)) );
+        }
+        if(isHistory){
+            //당첨결과 발표된 회차
+            String result = ticket.getResultRanking();
+            viewHolder.tvResult.setText(result);
+        }else{
+            //아직 당첨결과 발표되지 않은 회차
+            viewHolder.tvResult.setText("대기중");
+
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

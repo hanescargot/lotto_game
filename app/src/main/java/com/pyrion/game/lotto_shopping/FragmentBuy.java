@@ -141,8 +141,8 @@ public class FragmentBuy extends Fragment {
             @Override
             public void onClick(View v) {
                 if(NumberPad.buyNumbers.size()!=6){ return; }
-                ArrayList<Integer> newNumbers =  (ArrayList<Integer>)NumberPad.buyNumbers.clone();
-                Collections.sort(newNumbers);
+                User.TicketDB newNumbers =  new User.TicketDB((ArrayList<Integer>) NumberPad.buyNumbers.clone());
+                Collections.sort(newNumbers.getNumbers());
                 User.weekBoughtTickets.add(  newNumbers );
                 SharedPref.editData(SharedPref.ticketKey, User.weekBoughtTickets);
                 if(SharedPref.adapterHistory != null){
@@ -195,8 +195,9 @@ public class FragmentBuy extends Fragment {
         super.onResume();
     }
 
-    Toast toast;
-    public void showToast( String str ){
+
+    public Toast toast;
+    public void showToast(String str){
         if(toast != null) {
             toast.cancel();
         }

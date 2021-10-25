@@ -24,6 +24,7 @@ import com.pyrion.game.lotto_shopping.data.Auction;
 import com.pyrion.game.lotto_shopping.data.Lotto;
 import com.pyrion.game.lotto_shopping.data.SharedPref;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -167,7 +168,7 @@ public class Fragment extends androidx.fragment.app.Fragment {
     }
 
     RequestQueue requestQueue;
-    String[] key = {"drwtNo1", "drwtNo2", "drwtNo3", "drwtNo4", "drwtNo5", "drwtNo6", "bnusNo"};
+    String[] key = {"drwtNo1", "drwtNo2", "drwtNo3", "drwtNo4", "drwtNo5", "drwtNo6"};
     public void setLottoBall(int drwNo){
         adapterHistory.notifyDataSetChanged();
         if(drwNo == (Lotto.latestDrwNo+1)){
@@ -175,18 +176,17 @@ public class Fragment extends androidx.fragment.app.Fragment {
             tvTimer.setVisibility(View.VISIBLE);
             resultBalls.setVisibility(View.INVISIBLE);
             return;
-        }else{
-            //당첨결과 있을 때
-            tvTimer.setVisibility(View.INVISIBLE);
-            resultBalls.setVisibility(View.VISIBLE);
         }
+        //당첨결과 있을 때
+        tvTimer.setVisibility(View.INVISIBLE);
+        resultBalls.setVisibility(View.VISIBLE);
 
 
-        if(Lotto.lottoNumberHash.containsKey(drwNo)){
+        if(Lotto.hashHistoryResults != null && Lotto.hashHistoryResults.containsKey(drwNo)){
             //이미 서버에서 가져온 DB가 있을 때
-            int[] nums = Lotto.lottoNumberHash.get(drwNo);
-            for (int i=0; i<nums.length; i++){
-                int num = nums[i];
+            Lotto.HistoryResultNumberDB nums = Lotto.hashHistoryResults.get(drwNo);
+            for (int i=0; i<nums.getNumbers().size(); i++){
+                int num = nums.getNumbers().get(i);
                 tvBallNum[i].setText(num+"");
                 tvBallNum[i].setBackgroundResource( Lotto.getBgSrc(num) );
             }
@@ -203,14 +203,20 @@ public class Fragment extends androidx.fragment.app.Fragment {
                     public void onResponse(String response) {
                         HashMap<String,Double> data = new Gson().fromJson(response, HashMap.class);
                         if(data.isEmpty()) return;
-                        int[] numbers = new int[7];
+                        ArrayList<Integer> numbers = new ArrayList<>();
                         for (int i = 0; i< key.length; i++){
+                            //일반 번호 추가
                             int num = data.get(key[i]).intValue();
                             tvBallNum[i].setText(num+"");
                             tvBallNum[i].setBackgroundResource( Lotto.getBgSrc(num) );
-                            numbers[i] = num;
+                            numbers.add(num);
                         }
-                        Lotto.lottoNumberHash.put(drwNo, numbers);
+                        int bNum =data.get("bnusNo").intValue();
+                        Lotto.HistoryResultNumberDB newDB = new Lotto.HistoryResultNumberDB(numbers,bNum);
+                        if(Lotto.hashHistoryResults==null){
+                            Lotto.hashHistoryResults = new HashMap<>();
+                        }
+                        Lotto.hashHistoryResults.put(drwNo, newDB);
                     }
                 },
                 new Response.ErrorListener() {

@@ -1,7 +1,6 @@
 package com.pyrion.game.lotto_shopping;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,19 +20,18 @@ public class NumberPadAdapter extends BaseAdapter {
     Context context;
     ImageView btnBuy;
     View btnSearch;
-    Boolean isDialog = false;
+    Boolean isResearchNumPad = false;
 
     ArrayList<Integer> numberPadNumAddress;
 
     public NumberPadAdapter(Context context, View btn){
-        isDialog = true;
+        isResearchNumPad = true;
         this.context = context;
         for(int temp = 0; temp<selectableNumbers.length; temp++){
             selectableNumbers[temp] = temp;
         }
         btnSearch = btn;
         numberPadNumAddress = NumberPad.researchNumbers;
-
     }
     public NumberPadAdapter(Context context, ImageView buyBtn){
         this.context = context;
@@ -85,8 +83,9 @@ public class NumberPadAdapter extends BaseAdapter {
                 int numCount = numberPadNumAddress.size();
                 if(iv.getVisibility()==View.VISIBLE){
                     if(numCount==6){
-                        if(isDialog){
+                        if(isResearchNumPad){
                             btnSearch.setBackgroundResource(R.drawable.auction_round_box_full_subblue);
+                            btnSearch.setTag("unactivated");
                         }else {
                             // button 비활성화
                             btnBuy.setImageResource(R.drawable.ic_red_button_grey);
@@ -110,9 +109,10 @@ public class NumberPadAdapter extends BaseAdapter {
                 numberPadNumAddress.add(checkedNum);
 
                 if(numCount==5){
-                    if(isDialog){
+                    if(isResearchNumPad){
                         //todo
                         btnSearch.setBackgroundResource(R.drawable.clickable_btn_blue);
+                        btnSearch.setTag("activated");
                     }else {
                         // button 활성화
                         btnBuy.setImageResource(R.drawable.clickable_btn_red);

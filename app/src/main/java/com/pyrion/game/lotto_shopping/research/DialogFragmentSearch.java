@@ -1,11 +1,13 @@
 package com.pyrion.game.lotto_shopping.research;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -75,9 +77,34 @@ public class DialogFragmentSearch extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         View btn = view.findViewById(R.id.btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v.getTag().equals("unactivated")){
+                    showToast("6개를 선택해 주세요.");
+                    return;
+                }
+
+
+            }
+        });
 
         gridView = view.findViewById(R.id.number_pad_gridview);
         gridAdapter = new NumberPadAdapter(getActivity(), btn);
         gridView.setAdapter(gridAdapter);
+    }
+
+    public Toast toast;
+    public void showToast(String str){
+        if(toast != null) {
+            toast.cancel();
+        }
+        toast = Toast.makeText(
+                getActivity(),
+                str,
+                Toast.LENGTH_SHORT
+        );
+        toast.setGravity(Gravity.CENTER_VERTICAL,0,0);
+        toast.show();
     }
 }
