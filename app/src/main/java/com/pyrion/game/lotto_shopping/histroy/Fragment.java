@@ -3,7 +3,6 @@ package com.pyrion.game.lotto_shopping.histroy;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,20 +11,12 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
 import com.pyrion.game.lotto_shopping.R;
 import com.pyrion.game.lotto_shopping.data.Auction;
 import com.pyrion.game.lotto_shopping.data.Lotto;
 import com.pyrion.game.lotto_shopping.data.SharedPref;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -108,7 +99,7 @@ public class Fragment extends androidx.fragment.app.Fragment {
 
         tvDrwNo = view.findViewById(R.id.drw_no);
         tvDrwNo.setText(Lotto.selectedDrwNo+" 회");
-        setLottoBall(Lotto.selectedDrwNo);
+        setLottoResultBall(Lotto.selectedDrwNo);
 
         ImageButton btnLeft = view.findViewById(R.id.btn_left);
         ImageButton btnRight = view.findViewById(R.id.btn_right);
@@ -117,13 +108,9 @@ public class Fragment extends androidx.fragment.app.Fragment {
             public void onClick(View v) {
                 Lotto.selectedDrwNo -= 1;
                 tvDrwNo.setText(Lotto.selectedDrwNo+" 회");
-                setLottoBall(Lotto.selectedDrwNo);
-                if(  Lotto.selectedDrwNo != Lotto.latestDrwNo +1 ){
-                    btnRight.setVisibility(View.VISIBLE);
-                }
-                if( Lotto.selectedDrwNo == 1 ){
-                    btnLeft.setVisibility(View.INVISIBLE);
-                }
+                setLottoResultBall(Lotto.selectedDrwNo);
+                if(  Lotto.selectedDrwNo != Lotto.latestDrwNo +1 ) btnRight.setVisibility(View.VISIBLE);
+                if( Lotto.selectedDrwNo == 1 )btnLeft.setVisibility(View.INVISIBLE);
             }
         });
         btnRight.setOnClickListener(new View.OnClickListener() {
@@ -131,23 +118,14 @@ public class Fragment extends androidx.fragment.app.Fragment {
             public void onClick(View v) {
                 Lotto.selectedDrwNo += 1;
                 tvDrwNo.setText(Lotto.selectedDrwNo+" 회");
-                setLottoBall(Lotto.selectedDrwNo);
-                if( Lotto.selectedDrwNo == Lotto.latestDrwNo +1 ){
-                    btnRight.setVisibility(View.INVISIBLE);
-                }
-                if( Lotto.selectedDrwNo != 1 ){
-                    btnLeft.setVisibility(View.VISIBLE);
-                }
+                setLottoResultBall(Lotto.selectedDrwNo);
+                if( Lotto.selectedDrwNo == Lotto.latestDrwNo +1 )btnRight.setVisibility(View.INVISIBLE);
+                if( Lotto.selectedDrwNo != 1 )btnLeft.setVisibility(View.VISIBLE);
             }
         });
 
-        if( Lotto.selectedDrwNo == Lotto.latestDrwNo +1 ){
-            btnRight.setVisibility(View.INVISIBLE);
-        }
-        if( Lotto.selectedDrwNo == 1 ){
-            btnLeft.setVisibility(View.INVISIBLE);
-        }
-
+        if( Lotto.selectedDrwNo == Lotto.latestDrwNo +1 )btnRight.setVisibility(View.INVISIBLE);
+        if( Lotto.selectedDrwNo == 1 )btnLeft.setVisibility(View.INVISIBLE);
 
         Handler handler = new Handler(){
             public void handleMessage(Message msg) {
@@ -169,7 +147,7 @@ public class Fragment extends androidx.fragment.app.Fragment {
 
     RequestQueue requestQueue;
     String[] key = {"drwtNo1", "drwtNo2", "drwtNo3", "drwtNo4", "drwtNo5", "drwtNo6"};
-    public void setLottoBall(int drwNo){
+    public void setLottoResultBall(int drwNo){
         adapterHistory.notifyDataSetChanged();
         if(drwNo == (Lotto.latestDrwNo+1)){
             //아직 당첨 결과가 없는 주
@@ -177,58 +155,18 @@ public class Fragment extends androidx.fragment.app.Fragment {
             resultBalls.setVisibility(View.INVISIBLE);
             return;
         }
-        //당첨결과 있을 때
+        //과거 당첨결과 일 때
         tvTimer.setVisibility(View.INVISIBLE);
         resultBalls.setVisibility(View.VISIBLE);
 
-
-        if(Lotto.hashHistoryResults != null && Lotto.hashHistoryResults.containsKey(drwNo)){
-            //이미 서버에서 가져온 DB가 있을 때
-            Lotto.HistoryResultNumberDB nums = Lotto.hashHistoryResults.get(drwNo);
-            for (int i=0; i<nums.getNumbers().size(); i++){
-                int num = nums.getNumbers().get(i);
-                tvBallNum[i].setText(num+"");
-                tvBallNum[i].setBackgroundResource( Lotto.getBgSrc(num) );
-            }
-            Log.i("memory_t", nums+"");
-            return;
+        Lotto.HistoryResultNumberDB nums = Lotto.getHistoryResultNumber(drwNo); //서버인지 내부저장소인지 알아서 판단해서 가져옴
+        if (nums == null) return;
+        for (int i=0; i<nums.getNumbers().size(); i++){
+            int num = nums.getNumbers().get(i);
+            tvBallNum[i].setText(num+"");
+            tvBallNum[i].setBackgroundResource( Lotto.getBgSrc(num) );
         }
-        //서버에서 가져오기
-        requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
-        String url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo="+drwNo;
-        StringRequest request = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        HashMap<String,Double> data = new Gson().fromJson(response, HashMap.class);
-                        if(data.isEmpty()) return;
-                        ArrayList<Integer> numbers = new ArrayList<>();
-                        for (int i = 0; i< key.length; i++){
-                            //일반 번호 추가
-                            int num = data.get(key[i]).intValue();
-                            tvBallNum[i].setText(num+"");
-                            tvBallNum[i].setBackgroundResource( Lotto.getBgSrc(num) );
-                            numbers.add(num);
-                        }
-                        int bNum =data.get("bnusNo").intValue();
-                        Lotto.HistoryResultNumberDB newDB = new Lotto.HistoryResultNumberDB(numbers,bNum);
-                        if(Lotto.hashHistoryResults==null){
-                            Lotto.hashHistoryResults = new HashMap<>();
-                        }
-                        Lotto.hashHistoryResults.put(drwNo, newDB);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i("response", "response_err"+error);
-                    }
-                }
-        );
-
-        request.setShouldCache(false);
-        requestQueue.add(request);
     }
 
 

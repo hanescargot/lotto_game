@@ -23,7 +23,7 @@ public class Lotto {
     public static int latestDrwNo = 1;
     public static int selectedDrwNo = 1; //on history
 
-    public static HashMap<Integer, HistoryResultNumberDB> hashHistoryResults;  //회차:[번호]
+    public static HashMap<Integer, HistoryResultNumberDB> hashHistoryResults = new HashMap<>();  //회차:[번호]
 
     private static RequestQueue requestQueue;
 
@@ -112,47 +112,47 @@ public class Lotto {
 
     static HistoryResultNumberDB lottoResultNumber;
     public static HistoryResultNumberDB getHistoryResultNumber(int drwNo){
-
-        if(hashHistoryResults.containsKey(drwNo)) {
+        if(hashHistoryResults!=null && hashHistoryResults.containsKey(drwNo)) {
             //1.Static, Spref에 데이터가 있을 때
             lottoResultNumber = hashHistoryResults.get(drwNo);
-        }else {
-            //3.Server에서 데이터 찾아서 ->Shared, Static 으로 넘기기
-            //서버에서 가져오기
-            requestQueue = Volley.newRequestQueue(context.getApplicationContext());
-            String[] key = {"drwtNo1", "drwtNo2", "drwtNo3", "drwtNo4", "drwtNo5", "drwtNo6"};
-            String url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo="+drwNo;
-            StringRequest request = new StringRequest(Request.Method.GET, url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            HashMap<String,Double> data = new Gson().fromJson(response, HashMap.class);
-                            if(data.isEmpty()) return;
-                            ArrayList<Integer> numbers = new ArrayList<>();
-                            for (int i = 0; i< key.length; i++){
-                                //일반 번호 추가
-                                int num = data.get(key[i]).intValue();
-                                numbers.add(num);
-                            }
-                            int bNum =data.get("bnusNo").intValue();
-                            HistoryResultNumberDB newDB = new HistoryResultNumberDB(numbers,bNum);
-                            lottoResultNumber = newDB;
-
-                            //종료하기전에 Spref에 저장해줌
-                            Lotto.hashHistoryResults.put(drwNo, newDB);
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.i("response", "response_err"+error);
-                        }
-                    }
-            );
-
-            request.setShouldCache(false);
-            requestQueue.add(request);
+            Log.i("lkkk", "newDB:" + lottoResultNumber);
+            return lottoResultNumber;
         }
+        //3.Server에서 데이터 찾아서 ->Shared, Static 으로 넘기기
+        //서버에서 가져오기
+        requestQueue = Volley.newRequestQueue(context.getApplicationContext());
+        String[] key = {"drwtNo1", "drwtNo2", "drwtNo3", "drwtNo4", "drwtNo5", "drwtNo6"};
+        String url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo="+drwNo;
+        StringRequest request = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        HashMap<String,Double> data = new Gson().fromJson(response, HashMap.class);
+                        Log.i("lkkk", "newDB:" + "from server");
+                        if(data.isEmpty()) return;
+                        ArrayList<Integer> numbers = new ArrayList<>();
+                        for (int i = 0; i< key.length; i++){
+                            //일반 번호 추가
+                            int num = data.get(key[i]).intValue();
+                            numbers.add(num);
+                        }
+                        int bNum =data.get("bnusNo").intValue();
+                        HistoryResultNumberDB newDB = new HistoryResultNumberDB(numbers,bNum);
+                        lottoResultNumber = newDB;
+
+                        //종료하기전(OnDestroy)에 Spref에 저장해줌
+                        hashHistoryResults.put(drwNo, newDB);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("response", "response_err"+error);
+                    }
+                }
+        );
+        request.setShouldCache(false);
+        requestQueue.add(request);
         return lottoResultNumber;
     }
 
@@ -174,14 +174,14 @@ public class Lotto {
             this.numbers = numbers;
             this.bNum = bNum;
         }
-
+        //setter
         public void setNumbers(ArrayList<Integer> numbers) {
             this.numbers = numbers;
         }
         public void setbNum(int bNum) {
             this.bNum = bNum;
         }
-
+        //getter
         public ArrayList<Integer> getNumbers() {
             return numbers;
         }

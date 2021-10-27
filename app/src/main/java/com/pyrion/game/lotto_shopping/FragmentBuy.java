@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -106,7 +105,7 @@ public class FragmentBuy extends Fragment {
             public void onClick(View v) {
                 //레트로핏 초기화
                 showToast("초기화 완료");
-                NumberPad.buyNumbers.clear();
+                NumberPad.buyCheckedNumbers.clear();
 
                 gridAdapter.notifyDataSetChanged();
                 buyBtn.setImageResource(R.drawable.ic_red_button_grey);
@@ -118,17 +117,17 @@ public class FragmentBuy extends Fragment {
             @Override
             public void onClick(View v) {
                 Random random = new Random();
-                int newNumCount = NumberPad.buyNumbers.size();
+                int newNumCount = NumberPad.buyCheckedNumbers.size();
                 if(newNumCount == 6){
                     showToast("이미 모든 번호가 선택되어 있습니다");
                 }else{
                     showToast("자동 번호 생성");
                     for (int i=0; i<(6-newNumCount); i++){
                         int newNum = random.nextInt(45)+1;
-                        while (NumberPad.buyNumbers.contains(newNum)){
+                        while (NumberPad.buyCheckedNumbers.contains(newNum)){
                             newNum = random.nextInt(45)+1;
                         }
-                        NumberPad.buyNumbers.add( newNum );
+                        NumberPad.buyCheckedNumbers.add( newNum );
                     }
                     gridAdapter.notifyDataSetChanged();
                     buyBtn.setImageResource(R.drawable.clickable_btn_red);
@@ -140,11 +139,11 @@ public class FragmentBuy extends Fragment {
         buyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(NumberPad.buyNumbers.size()!=6){ return; }
-                User.TicketDB newNumbers =  new User.TicketDB((ArrayList<Integer>) NumberPad.buyNumbers.clone());
+                if(NumberPad.buyCheckedNumbers.size()!=6){ return; }
+                User.TicketDB newNumbers =  new User.TicketDB((ArrayList<Integer>) NumberPad.buyCheckedNumbers.clone());
                 Collections.sort(newNumbers.getNumbers());
                 User.weekBoughtTickets.add(  newNumbers );
-                SharedPref.editData(SharedPref.ticketKey, User.weekBoughtTickets);
+                SharedPref.editData(SharedPref.boughtTicketKey, User.weekBoughtTickets);
                 if(SharedPref.adapterHistory != null){
                     SharedPref.adapterHistory.notifyDataSetChanged();
                 }
@@ -152,7 +151,7 @@ public class FragmentBuy extends Fragment {
 //                가격 계산하기
 //                롤백 기능
                 showToast("구매 완료");
-                NumberPad.buyNumbers.clear();
+                NumberPad.buyCheckedNumbers.clear();
                 gridAdapter.notifyDataSetChanged();
                 buyBtn.setImageResource(R.drawable.ic_red_button_grey);
 //

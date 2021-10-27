@@ -84,8 +84,6 @@ public class DialogFragmentSearch extends Fragment {
                     showToast("6개를 선택해 주세요.");
                     return;
                 }
-
-
             }
         });
 

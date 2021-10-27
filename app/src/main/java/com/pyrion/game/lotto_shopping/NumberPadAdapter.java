@@ -39,7 +39,7 @@ public class NumberPadAdapter extends BaseAdapter {
         for(int temp = 0; temp<selectableNumbers.length; temp++){
             selectableNumbers[temp] = temp;
         }
-        numberPadNumAddress = NumberPad.buyNumbers;
+        numberPadNumAddress = NumberPad.buyCheckedNumbers;
 
     }
 

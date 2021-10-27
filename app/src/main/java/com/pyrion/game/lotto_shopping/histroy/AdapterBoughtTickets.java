@@ -11,17 +11,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pyrion.game.lotto_shopping.R;
 import com.pyrion.game.lotto_shopping.data.Lotto;
+import com.pyrion.game.lotto_shopping.data.SharedPref;
 import com.pyrion.game.lotto_shopping.data.User;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class AdapterBoughtTickets extends RecyclerView.Adapter {
     Context context;
     TextView tvNoTickets;
-    ArrayList< User.TicketDB > tickets;
+    ArrayList< User.TicketDB > tickets = new ArrayList<>();
     LayoutInflater inflater;
     Boolean isHistory;
+
     public AdapterBoughtTickets(Context context, TextView tvNoTickets){
         this.context = context;
         this.tvNoTickets = tvNoTickets;
@@ -40,12 +41,12 @@ public class AdapterBoughtTickets extends RecyclerView.Adapter {
         this.isHistory = !(Lotto.selectedDrwNo == Lotto.latestDrwNo+1); //
         if(isHistory){
             if(User.historyBoughtTickets.containsKey(Lotto.selectedDrwNo)){
-                tickets = User.historyBoughtTickets.get(Lotto.selectedDrwNo);
+                tickets = User.historyBoughtTickets.get(Lotto.selectedDrwNo); //회차의 티켓들
             }else{
                 tickets.clear();
             }
         }else{
-            tickets =  User.weekBoughtTickets;
+            tickets =  (ArrayList<User.TicketDB>) User.weekBoughtTickets.clone();
         }
 
         if(tickets.size()==0){tvNoTickets.setVisibility(View.VISIBLE);

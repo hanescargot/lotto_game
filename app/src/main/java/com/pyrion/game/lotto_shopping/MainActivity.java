@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 
@@ -81,11 +82,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        DB !!!!!!!!!!!!!!!!!! pref -> public
-        new SharedPref(this);
-        new Lotto(this);
-        User.weekBoughtTickets = (ArrayList<User.TicketDB>)SharedPref.getData(SharedPref.ticketKey, SharedPref.ticketType);
-        Lotto.hashHistoryResults = (HashMap<Integer, Lotto.HistoryResultNumberDB>)SharedPref.getData(SharedPref.hashResultsKey, SharedPref.hashResultsType);
     }
 
     public void bottomIconColor(int color){
@@ -101,6 +97,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void getCurrentLottoDB(){
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+//        DB !!!!!!!!!!!!!!!!!! pref -> public
+        new SharedPref(this);
+        new Lotto(this);
+        User.weekBoughtTickets = (ArrayList<User.TicketDB>)SharedPref.getData(SharedPref.boughtTicketKey, SharedPref.boughtTicketType);
+        Lotto.hashHistoryResults = (HashMap<Integer, Lotto.HistoryResultNumberDB>)SharedPref.getData(SharedPref.hashResultsKey, SharedPref.hashResultsType);
+        if ( User.weekBoughtTickets == null)  User.weekBoughtTickets = new ArrayList<>();
+        if (Lotto.hashHistoryResults == null) Lotto.hashHistoryResults = new HashMap<>();
     }
 
     @Override
