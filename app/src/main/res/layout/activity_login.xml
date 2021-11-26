@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lotto Shopping"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="@color/main_blue_dark"
+        android:fontFamily="@font/e_font"
+        />
+
+
+
+    <TextView
+        android:id="@+id/tv_ask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="문의하기"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:textSize="24sp"
+        android:textColor="@color/main_blue_dark"
+        />
+
+    <TextView
+        android:layout_above="@id/google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="간편 로그인"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:textSize="24sp"
+        android:textColor="@color/main_blue_dark"
+        />
+
+    <LinearLayout
+        android:id="@+id/google"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tv_ask"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="80dp"
+        android:gravity="center"
+        android:background="@drawable/box_round_noti"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/main_blue_dark"
+        >
+        <ImageView
+
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_lotto_ball_yellow"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이메일로 로그인"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            />
+    </LinearLayout>
+
+
+
+</RelativeLayout>
