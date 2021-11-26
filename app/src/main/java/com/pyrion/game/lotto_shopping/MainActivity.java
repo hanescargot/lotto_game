@@ -7,13 +7,12 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.pyrion.game.lotto_shopping.data.Lotto;
-import com.pyrion.game.lotto_shopping.data.SharedPref;
+import com.pyrion.game.lotto_shopping.data.DeviceFile;
 import com.pyrion.game.lotto_shopping.data.User;
 
 import java.util.ArrayList;
@@ -104,12 +103,12 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
 //        DB !!!!!!!!!!!!!!!!!! pref -> public
-        new SharedPref(this);
+        new DeviceFile(this);
         new Lotto(this);
-        User.weekBoughtTickets = (ArrayList<User.TicketDB>)SharedPref.getData(SharedPref.boughtTicketKey, SharedPref.boughtTicketType);
-        Lotto.hashHistoryResults = (HashMap<Integer, Lotto.HistoryResultNumberDB>)SharedPref.getData(SharedPref.hashResultsKey, SharedPref.hashResultsType);
+        User.weekBoughtTickets = (ArrayList<User.TicketDB>) DeviceFile.getData(DeviceFile.boughtTicketKey, DeviceFile.TYPE_BOUGHT_TICKET);
+        Lotto.winningNumberSets = (HashMap<Integer, Lotto.WinningNumberSet>) DeviceFile.getData(DeviceFile.winNumSetKey, DeviceFile.TYPE_WIN_NUM_SET);
         if ( User.weekBoughtTickets == null)  User.weekBoughtTickets = new ArrayList<>();
-        if (Lotto.hashHistoryResults == null) Lotto.hashHistoryResults = new HashMap<>();
+        if (Lotto.winningNumberSets == null) Lotto.winningNumberSets = new HashMap<>();
     }
 
     @Override
@@ -117,6 +116,6 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
 
         //DB!!!   public -> pref
-        SharedPref.editData(SharedPref.hashResultsKey,Lotto.hashHistoryResults);
+        DeviceFile.editData(DeviceFile.winNumSetKey,Lotto.winningNumberSets);
     }
 }

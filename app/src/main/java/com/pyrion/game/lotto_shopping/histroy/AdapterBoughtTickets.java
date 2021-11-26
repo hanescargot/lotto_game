@@ -1,7 +1,6 @@
 package com.pyrion.game.lotto_shopping.histroy;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pyrion.game.lotto_shopping.R;
 import com.pyrion.game.lotto_shopping.data.Lotto;
-import com.pyrion.game.lotto_shopping.data.SharedPref;
 import com.pyrion.game.lotto_shopping.data.User;
 
 import java.util.ArrayList;

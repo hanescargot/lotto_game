@@ -15,7 +15,7 @@ import com.android.volley.RequestQueue;
 import com.pyrion.game.lotto_shopping.R;
 import com.pyrion.game.lotto_shopping.data.Auction;
 import com.pyrion.game.lotto_shopping.data.Lotto;
-import com.pyrion.game.lotto_shopping.data.SharedPref;
+import com.pyrion.game.lotto_shopping.data.DeviceFile;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -93,7 +93,7 @@ public class Fragment extends androidx.fragment.app.Fragment {
         resultBalls = view.findViewById(R.id.result_balls);
         tvNoTickets = view.findViewById(R.id.tv_no_tickets);
         adapterHistory = new AdapterBoughtTickets(getActivity(), tvNoTickets);//SharedPref.getData("week_bought_tickets", )
-        SharedPref.adapterHistory  = adapterHistory;
+        DeviceFile.adapterHistory  = adapterHistory;
         recyclerView.setAdapter(adapterHistory);
 
 
@@ -159,7 +159,7 @@ public class Fragment extends androidx.fragment.app.Fragment {
         tvTimer.setVisibility(View.INVISIBLE);
         resultBalls.setVisibility(View.VISIBLE);
 
-        Lotto.HistoryResultNumberDB nums = Lotto.getHistoryResultNumber(drwNo); //서버인지 내부저장소인지 알아서 판단해서 가져옴
+        Lotto.WinningNumberSet nums = Lotto.getHistoryResultNumber(drwNo); //서버인지 내부저장소인지 알아서 판단해서 가져옴
         if (nums == null) return;
         for (int i=0; i<nums.getNumbers().size(); i++){
             int num = nums.getNumbers().get(i);

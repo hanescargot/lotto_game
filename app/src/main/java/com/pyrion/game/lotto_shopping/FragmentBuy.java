@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pyrion.game.lotto_shopping.data.NumberPad;
-import com.pyrion.game.lotto_shopping.data.SharedPref;
+import com.pyrion.game.lotto_shopping.data.DeviceFile;
 import com.pyrion.game.lotto_shopping.data.Ticket;
 import com.pyrion.game.lotto_shopping.data.User;
 
@@ -143,9 +143,9 @@ public class FragmentBuy extends Fragment {
                 User.TicketDB newNumbers =  new User.TicketDB((ArrayList<Integer>) NumberPad.buyCheckedNumbers.clone());
                 Collections.sort(newNumbers.getNumbers());
                 User.weekBoughtTickets.add(  newNumbers );
-                SharedPref.editData(SharedPref.boughtTicketKey, User.weekBoughtTickets);
-                if(SharedPref.adapterHistory != null){
-                    SharedPref.adapterHistory.notifyDataSetChanged();
+                DeviceFile.editData(DeviceFile.boughtTicketKey, User.weekBoughtTickets);
+                if(DeviceFile.adapterHistory != null){
+                    DeviceFile.adapterHistory.notifyDataSetChanged();
                 }
 //                서버로 보내기
 //                가격 계산하기
