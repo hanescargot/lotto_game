@@ -9,18 +9,16 @@ import com.pyrion.game.lotto_shopping.histroy.AdapterBoughtTickets;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class DeviceFile {
 
     public static String FILENAME_WIN_NUM_SET = "win_num_set";
 
-    public static String FILENAME_TICKET_NUM_SET_ARRAY = "ticket_num_set_array";
+    public static String FILENAME_USER_TICKET_DB_ARRAY = "user_ticket_db_array";
     public static String boughtTicketKey = "week_bought_tickets";
 
-    public static Type TYPE_BOUGHT_TICKET = new TypeToken< ArrayList<User.TicketDB> >(){}.getType();
-    public static Type TYPE_WIN_NUM_SET = new TypeToken< WinNumSet >(){}.getType();
-    public static Type TYPE_TICKET_NUM_SET_ARRAY = new TypeToken< ArrayList<TicketNumSet> >(){}.getType();
+    public static Type TYPE_WIN_NUM_SET = new TypeToken<WinNumDB>(){}.getType();
+    public static Type TYPE_USER_TICKET_DB_ARRAY = new TypeToken< ArrayList<UserTicketResultDB> >(){}.getType();
 
 
     public static AdapterBoughtTickets adapterHistory = null;
@@ -45,6 +43,10 @@ public class DeviceFile {
         String stringData = new Gson().toJson(data);
         editor.putString(key, stringData);
         editor.apply();
+    }
+
+    public static void syncData(){
+        //todo
     }
 
 //    //Delete

@@ -14,9 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.pyrion.game.lotto_shopping.data.Lotto;
 import com.pyrion.game.lotto_shopping.data.DeviceFile;
 import com.pyrion.game.lotto_shopping.data.User;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.pyrion.game.lotto_shopping.data.UserTicketDAO;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -101,14 +99,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
 //        DB !!!!!!!!!!!!!!!!!! pref -> public
-        new DeviceFile(this);
-        new Lotto(this);
-        User.weekBoughtTickets = (ArrayList<User.TicketDB>) DeviceFile.getData(DeviceFile.boughtTicketKey, DeviceFile.TYPE_BOUGHT_TICKET);
-        Lotto.winningNumberSets = (HashMap<Integer, Lotto.WinningNumberSet>) DeviceFile.getData(DeviceFile.winNumSetKey, DeviceFile.TYPE_WIN_NUM_SET);
-        if ( User.weekBoughtTickets == null)  User.weekBoughtTickets = new ArrayList<>();
-        if (Lotto.winningNumberSets == null) Lotto.winningNumberSets = new HashMap<>();
+       UserTicketDAO.syncTicketData(this);
     }
 
     @Override
@@ -116,6 +108,6 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
 
         //DB!!!   public -> pref
-        DeviceFile.editData(DeviceFile.winNumSetKey,Lotto.winningNumberSets);
+        DeviceFile.syncData();
     }
 }

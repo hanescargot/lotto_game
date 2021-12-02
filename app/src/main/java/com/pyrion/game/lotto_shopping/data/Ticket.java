@@ -3,9 +3,12 @@ package com.pyrion.game.lotto_shopping.data;
 import java.util.ArrayList;
 
 public class Ticket {
-    public static int COIN = 0 ;
-    public static int AD = 1 ;
-    public static int TIME = 2 ;
+    public static ArrayList<Integer> buyNumberPadNum = new ArrayList<>();  // 6개 체크 가능
+    public static ArrayList<Integer> researchNumberPadNum = new ArrayList<>();  // 6개 체크 가능
+
+    private static final int COIN = 0 ;
+    private static final int AD = 1 ;
+    private static final int TIME = 2 ;
 
     public static int selected = Ticket.AD;
 //    public static ArrayList<int[]> bought = new ArrayList<>();

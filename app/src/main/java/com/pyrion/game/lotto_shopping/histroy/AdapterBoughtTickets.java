@@ -10,14 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pyrion.game.lotto_shopping.R;
 import com.pyrion.game.lotto_shopping.data.Lotto;
+import com.pyrion.game.lotto_shopping.data.SixNum;
 import com.pyrion.game.lotto_shopping.data.User;
+import com.pyrion.game.lotto_shopping.data.UserTicketDAO;
+import com.pyrion.game.lotto_shopping.data.UserTicketResultDB;
 
 import java.util.ArrayList;
 
 public class AdapterBoughtTickets extends RecyclerView.Adapter {
     Context context;
     TextView tvNoTickets;
-    ArrayList< User.TicketDB > tickets = new ArrayList<>();
     LayoutInflater inflater;
     Boolean isHistory;
 
@@ -33,37 +35,30 @@ public class AdapterBoughtTickets extends RecyclerView.Adapter {
         return new ViewHolder( itemView );
     }
 
-
+    ArrayList<UserTicketResultDB> userTicketResultDBs;
     @Override
     public int getItemCount() {
-        this.isHistory = !(Lotto.selectedDrwNo == Lotto.latestDrwNo+1); //
-        if(isHistory){
-            if(User.historyBoughtTickets.containsKey(Lotto.selectedDrwNo)){
-                tickets = User.historyBoughtTickets.get(Lotto.selectedDrwNo); //회차의 티켓들
-            }else{
-                tickets.clear();
-            }
-        }else{
-            tickets =  (ArrayList<User.TicketDB>) User.weekBoughtTickets.clone();
-        }
-
-        if(tickets.size()==0){tvNoTickets.setVisibility(View.VISIBLE);
+        this.isHistory = !(Lotto.selectedDrwNo == Lotto.getThisWeekDrwNo()); //
+        userTicketResultDBs = (ArrayList<UserTicketResultDB>)(UserTicketDAO.getUserTicketArr(context, Lotto.selectedDrwNo)).clone(); //회차의 티켓들
+        if(userTicketResultDBs==null){tvNoTickets.setVisibility(View.VISIBLE);
         }else {tvNoTickets.setVisibility(View.INVISIBLE);}
-        return tickets.size();
+        return userTicketResultDBs.size();
+
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder)holder;
-        User.TicketDB ticket = tickets.get(position);
-        for(int i=0; i<viewHolder.getBallTextViews().length; i++){
+        UserTicketResultDB userTicketResult = userTicketResultDBs.get(position) ;
+        SixNum sixNum = userTicketResult.sixNum;
+        for(int i=0; i<sixNum.len(); i++){
             TextView tvBall = viewHolder.getBallTextViews()[i];
-            tvBall.setText(ticket.getNumbers().get(i)+"");
-            tvBall.setBackgroundResource(Lotto.getBgSrc( ticket.getNumbers().get(i)) );
+            tvBall.setText(sixNum.getNumber(i));
+            tvBall.setBackgroundResource(Lotto.getBgSrc( sixNum.getNumber(i) ));
         }
         if(isHistory){
-            //당첨결과 발표된 회차
-            String result = ticket.getResultRanking();
+            //당첨결과 발표된 회차의 사용자 티켓
+            String result = userTicketResult.getRankingStr();
             viewHolder.tvResult.setText(result);
         }else{
             //아직 당첨결과 발표되지 않은 회차

@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.pyrion.game.lotto_shopping.data.NumberPad;
+import com.pyrion.game.lotto_shopping.data.Ticket;
 
 import java.util.ArrayList;
 
@@ -22,24 +22,27 @@ public class NumberPadAdapter extends BaseAdapter {
     View btnSearch;
     Boolean isResearchNumPad = false;
 
-    ArrayList<Integer> numberPadNumAddress;
+
+    ArrayList<Integer> numberPadNumAddress;  // 6개 체크 가능
 
     public NumberPadAdapter(Context context, View btn){
+        //연구 페이지에 있는 넘패드
         isResearchNumPad = true;
         this.context = context;
         for(int temp = 0; temp<selectableNumbers.length; temp++){
             selectableNumbers[temp] = temp;
         }
         btnSearch = btn;
-        numberPadNumAddress = NumberPad.researchNumbers;
+        numberPadNumAddress = Ticket.researchNumberPadNum;
     }
     public NumberPadAdapter(Context context, ImageView buyBtn){
+
         this.context = context;
         this.btnBuy = buyBtn;
         for(int temp = 0; temp<selectableNumbers.length; temp++){
             selectableNumbers[temp] = temp;
         }
-        numberPadNumAddress = NumberPad.buyCheckedNumbers;
+        numberPadNumAddress = Ticket.buyNumberPadNum;
 
     }
 
@@ -93,8 +96,8 @@ public class NumberPadAdapter extends BaseAdapter {
                     }
                     //이미 체크되어 있었던 것 클릭
                     iv.setVisibility(View.INVISIBLE);
-                    if(numberPadNumAddress.indexOf(checkedNum)!=-1){
-                        numberPadNumAddress.remove(numberPadNumAddress.indexOf(checkedNum));
+                    if(numberPadNumAddress.contains(checkedNum)){
+                        numberPadNumAddress.contains(numberPadNumAddress.indexOf(checkedNum));
                     }
                     return;
                 }

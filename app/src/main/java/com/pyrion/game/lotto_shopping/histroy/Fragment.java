@@ -16,7 +16,13 @@ import com.pyrion.game.lotto_shopping.R;
 import com.pyrion.game.lotto_shopping.data.Auction;
 import com.pyrion.game.lotto_shopping.data.Lotto;
 import com.pyrion.game.lotto_shopping.data.DeviceFile;
+import com.pyrion.game.lotto_shopping.data.SixNum;
+import com.pyrion.game.lotto_shopping.data.UserTicketDAO;
+import com.pyrion.game.lotto_shopping.data.UserTicketResultDB;
+import com.pyrion.game.lotto_shopping.data.WinNumDAO;
+import com.pyrion.game.lotto_shopping.data.WinNumDB;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -66,14 +72,11 @@ public class Fragment extends androidx.fragment.app.Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Lotto.selectedDrwNo = Lotto.latestDrwNo+1;
         return inflater.inflate(R.layout.fragment_histroy, container, false);
     }
 
@@ -109,7 +112,7 @@ public class Fragment extends androidx.fragment.app.Fragment {
                 Lotto.selectedDrwNo -= 1;
                 tvDrwNo.setText(Lotto.selectedDrwNo+" 회");
                 setLottoResultBall(Lotto.selectedDrwNo);
-                if(  Lotto.selectedDrwNo != Lotto.latestDrwNo +1 ) btnRight.setVisibility(View.VISIBLE);
+                if(  Lotto.selectedDrwNo != Lotto.getThisWeekDrwNo()) btnRight.setVisibility(View.VISIBLE);
                 if( Lotto.selectedDrwNo == 1 )btnLeft.setVisibility(View.INVISIBLE);
             }
         });
@@ -119,12 +122,12 @@ public class Fragment extends androidx.fragment.app.Fragment {
                 Lotto.selectedDrwNo += 1;
                 tvDrwNo.setText(Lotto.selectedDrwNo+" 회");
                 setLottoResultBall(Lotto.selectedDrwNo);
-                if( Lotto.selectedDrwNo == Lotto.latestDrwNo +1 )btnRight.setVisibility(View.INVISIBLE);
+                if( Lotto.selectedDrwNo == Lotto.getThisWeekDrwNo() )btnRight.setVisibility(View.INVISIBLE);
                 if( Lotto.selectedDrwNo != 1 )btnLeft.setVisibility(View.VISIBLE);
             }
         });
 
-        if( Lotto.selectedDrwNo == Lotto.latestDrwNo +1 )btnRight.setVisibility(View.INVISIBLE);
+        if( Lotto.selectedDrwNo == Lotto.getThisWeekDrwNo() )btnRight.setVisibility(View.INVISIBLE);
         if( Lotto.selectedDrwNo == 1 )btnLeft.setVisibility(View.INVISIBLE);
 
         Handler handler = new Handler(){
@@ -149,7 +152,7 @@ public class Fragment extends androidx.fragment.app.Fragment {
     String[] key = {"drwtNo1", "drwtNo2", "drwtNo3", "drwtNo4", "drwtNo5", "drwtNo6"};
     public void setLottoResultBall(int drwNo){
         adapterHistory.notifyDataSetChanged();
-        if(drwNo == (Lotto.latestDrwNo+1)){
+        if(drwNo == Lotto.getThisWeekDrwNo()){
             //아직 당첨 결과가 없는 주
             tvTimer.setVisibility(View.VISIBLE);
             resultBalls.setVisibility(View.INVISIBLE);
@@ -159,14 +162,13 @@ public class Fragment extends androidx.fragment.app.Fragment {
         tvTimer.setVisibility(View.INVISIBLE);
         resultBalls.setVisibility(View.VISIBLE);
 
-        Lotto.WinningNumberSet nums = Lotto.getHistoryResultNumber(drwNo); //서버인지 내부저장소인지 알아서 판단해서 가져옴
-        if (nums == null) return;
-        for (int i=0; i<nums.getNumbers().size(); i++){
-            int num = nums.getNumbers().get(i);
+        WinNumDB winNumDB = WinNumDAO.getWinNumSet(getActivity(), drwNo); //서버인지 내부저장소인지 알아서 판단해서 가져옴
+        SixNum sixNum = winNumDB.getNumbers();
+        for (int i=0; i<sixNum.len(); i++){
+            int num = sixNum.getNumber(i);
             tvBallNum[i].setText(num+"");
             tvBallNum[i].setBackgroundResource( Lotto.getBgSrc(num) );
         }
-
     }
 
 

@@ -13,13 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.pyrion.game.lotto_shopping.data.NumberPad;
 import com.pyrion.game.lotto_shopping.data.DeviceFile;
+import com.pyrion.game.lotto_shopping.data.SixNum;
 import com.pyrion.game.lotto_shopping.data.Ticket;
-import com.pyrion.game.lotto_shopping.data.User;
+import com.pyrion.game.lotto_shopping.data.UserTicketDAO;
+import com.pyrion.game.lotto_shopping.data.UserTicketResultDB;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -103,9 +102,8 @@ public class FragmentBuy extends Fragment {
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //레트로핏 초기화
                 showToast("초기화 완료");
-                NumberPad.buyCheckedNumbers.clear();
+                Ticket.buyNumberPadNum.clear();
 
                 gridAdapter.notifyDataSetChanged();
                 buyBtn.setImageResource(R.drawable.ic_red_button_grey);
@@ -117,17 +115,17 @@ public class FragmentBuy extends Fragment {
             @Override
             public void onClick(View v) {
                 Random random = new Random();
-                int newNumCount = NumberPad.buyCheckedNumbers.size();
+                int newNumCount = Ticket.buyNumberPadNum.size();
                 if(newNumCount == 6){
                     showToast("이미 모든 번호가 선택되어 있습니다");
                 }else{
                     showToast("자동 번호 생성");
                     for (int i=0; i<(6-newNumCount); i++){
                         int newNum = random.nextInt(45)+1;
-                        while (NumberPad.buyCheckedNumbers.contains(newNum)){
+                        while (Ticket.buyNumberPadNum.contains(newNum)){
                             newNum = random.nextInt(45)+1;
                         }
-                        NumberPad.buyCheckedNumbers.add( newNum );
+                        Ticket.buyNumberPadNum.add( newNum );
                     }
                     gridAdapter.notifyDataSetChanged();
                     buyBtn.setImageResource(R.drawable.clickable_btn_red);
@@ -139,19 +137,17 @@ public class FragmentBuy extends Fragment {
         buyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(NumberPad.buyCheckedNumbers.size()!=6){ return; }
-                User.TicketDB newNumbers =  new User.TicketDB((ArrayList<Integer>) NumberPad.buyCheckedNumbers.clone());
-                Collections.sort(newNumbers.getNumbers());
-                User.weekBoughtTickets.add(  newNumbers );
-                DeviceFile.editData(DeviceFile.boughtTicketKey, User.weekBoughtTickets);
+                if(Ticket.buyNumberPadNum.size()!=6){ return; }
+                UserTicketResultDB newNumbers = new UserTicketResultDB(getActivity(), new SixNum(Ticket.buyNumberPadNum));
+                UserTicketDAO.addNewTicket( getActivity(),  newNumbers );
                 if(DeviceFile.adapterHistory != null){
                     DeviceFile.adapterHistory.notifyDataSetChanged();
                 }
-//                서버로 보내기
+//                todo 서버로 보내기
 //                가격 계산하기
 //                롤백 기능
                 showToast("구매 완료");
-                NumberPad.buyCheckedNumbers.clear();
+                Ticket.buyNumberPadNum.clear();
                 gridAdapter.notifyDataSetChanged();
                 buyBtn.setImageResource(R.drawable.ic_red_button_grey);
 //

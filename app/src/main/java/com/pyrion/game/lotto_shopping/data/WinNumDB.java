@@ -1,32 +1,28 @@
 package com.pyrion.game.lotto_shopping.data;
 
-import android.content.Intent;
-
-import java.util.ArrayList;
-
-public class WinNumSet {
-    int[] numbers = new int[6];
+public class WinNumDB {
+    SixNum numbers = new SixNum();
     int bNum;
 
-    public WinNumSet(){
+    public WinNumDB(){
     }
 
-    public WinNumSet(int[] numbers, int bNum) {
+    public WinNumDB(SixNum numbers, int bNum) {
         this.numbers = numbers;
         this.bNum = bNum;
     }
     //setter
-    public void setNumbers(int[] numbers) {
+    public void setNumbers(SixNum numbers) {
         this.numbers = numbers;
     }
     public void setbNum(int bNum) {
         this.bNum = bNum;
     }
     //getter
-    public int[] getNumbers() {
+    public SixNum getNumbers() {
         return numbers;
     }
-    public int getbNum() {
+    public int getBnusNum() {
         return bNum;
     }
 }
