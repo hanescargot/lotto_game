@@ -139,12 +139,12 @@
 
     <include
         android:id="@+id/center"
+        layout="@layout/component_number_check_pad"
+        android:layout_width="300dp"
+        android:layout_height="388dp"
         android:layout_below="@id/ticket_options"
         android:layout_centerHorizontal="true"
-        layout="@layout/component_number_check_pad"
-        android:layout_height="388dp"
-        android:layout_width="300dp"
-        android:layout_marginTop="4dp"/>
+        android:layout_marginTop="4dp" />
 
 
 
